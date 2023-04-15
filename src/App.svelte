@@ -1,11 +1,8 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
 </script>
 
 <main class="min-h-screen">
-
+  <h1 class="text-cr-h1">heading 1</h1>
 </main>
 
 <style lang="postcss">
