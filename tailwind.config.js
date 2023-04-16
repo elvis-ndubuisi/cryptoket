@@ -5,7 +5,8 @@ export default {
     extend: {
       colors: {
         "cr-red-violet": "#DA18A3",
-        "cr-red-linear": "#EB1484 - #C81CC5",
+        "cr-red-linear-start": "#EB1484",
+        "cr-red-linear-end": "#C81CC5",
         "cr-dark": "#24252D",
         "cr-light": "#FFFFFF",
         "cr-grey-100": "#E3E1E3",
