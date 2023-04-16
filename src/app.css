@@ -9,14 +9,3 @@
     font-family: "Poppins", sans-serif;
   }
 }
-
-@layer components {
-  .border-grad {
-    border-image: linear-gradient(
-        to right,
-        theme(colors.cr-red-linear-start),
-        theme(colors.cr-red-linear-end)
-      )
-      1;
-  }
-}

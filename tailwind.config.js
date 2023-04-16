@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class",
   content: ["./src/**/*.{html,js,svelte,ts}"],
   theme: {
     extend: {
@@ -14,7 +15,7 @@ export default {
         "cr-grey-300": "#4F4F4F",
         "cr-black-100": "#2D2E36",
         "cr-black-200": "#1B1A21",
-        "cr-black-300": "#E3E1E3",
+        "cr-black-300": "#2A2D3A",
         "cr-black-400": "#24252D",
       },
       fontSize: {
