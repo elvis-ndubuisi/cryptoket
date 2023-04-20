@@ -13,7 +13,7 @@
 
 <Router>
   <main
-    class="bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light"
+    class="min-h-full bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light"
   >
     <Header />
     <Route path="/" component={Home} />
@@ -23,15 +23,12 @@
     <Route path="login" component={Login} />
     <Route path="*" component={NotFound} />
   </main>
-  <!-- <Footer /> -->
+  <Footer />
 </Router>
 
 <style lang="postcss">
   :global(html) {
     /* background-color: theme(colors.cr-black-200); */
     font-family: "Poppins", sans-serif;
-  }
-  :global(body) {
-    min-height: theme("height.screen");
   }
 </style>
