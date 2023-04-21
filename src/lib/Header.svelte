@@ -22,7 +22,7 @@
       class="flex-1 md:flex-auto flex flex-col items-center gap-4 md:flex-row md:gap-5"
     >
       <Link to="/" class="text-base font-semibold capitalize">explore</Link>
-      <Link to="home" class="text-base font-semibold capitalize">my items</Link>
+      <Link to="item" class="text-base font-semibold capitalize">my items</Link>
       <Link to="profile" class="text-base font-semibold capitalize">
         profile
       </Link>

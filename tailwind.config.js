@@ -23,6 +23,12 @@ export default {
         "cr-h2": "24px",
         "cr-h3": "20px",
       },
+      screen: {
+        "cr-page": "992px",
+      },
+      width: {
+        "cr-page": "992px",
+      },
     },
   },
   plugins: [],

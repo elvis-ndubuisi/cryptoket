@@ -6,7 +6,11 @@
 <section>
   <section class="h-[367px] md:h-[518px]">
     <div class="flex flex-col items-center gap-3">
-      <img src="" alt="" />
+      <img
+        src=""
+        alt=""
+        class="border-2 h-[113.45px] aspect-square rounded-full overflow-hidden"
+      />
       <p class="text-cr-light font-semibold text-xl text-center capitalize">
         name
       </p>
