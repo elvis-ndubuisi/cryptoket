@@ -12,10 +12,10 @@
 </script>
 
 <Router>
+  <Header />
   <main
     class="min-h-full bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light"
   >
-    <Header />
     <Route path="/" component={Home} />
     <Route path="profile" component={Profile} />
     <Route path="item/create" component={CreateItem} />
