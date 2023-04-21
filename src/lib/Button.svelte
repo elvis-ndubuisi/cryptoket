@@ -17,9 +17,9 @@
 <button
   on:click={onclick}
   {type}
-  class={`border-none capitalize rounded-lg font-semibold text-sm py-2 w-full min-w-[100px] h-[inherit] ${
+  class={`capitalize rounded-lg font-semibold text-sm py-2 w-full min-w-[100px] h-[inherit] ${
     outline
-      ? "text-cr-red-violet bg-transparent "
+      ? "text-cr-red-violet border border-cr-red-violet  "
       : "text-cr-light bg-gradient-to-tr from-cr-red-linear-start to-cr-red-linear-end"
   } ${styles}`}
 >
