@@ -11,7 +11,7 @@
   import Footer from "./lib/Footer.svelte";
 </script>
 
-<Router>
+<Router primary={false}>
   <Header />
   <main
     class="min-h-full bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light"

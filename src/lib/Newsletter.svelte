@@ -8,7 +8,7 @@
   <input
     type="text"
     placeholder="your email"
-    class="flex-1 h-full bg-transparent outline-none font-medium text-sm placeholder:text-white px-3 placeholder:capitalize"
+    class="flex-1 h-full bg-transparent outline-none font-medium text-sm placeholder:text-white px-3 placeholder:capitalize max-w-[50%] md:max-w-none"
   />
   <Button styles="relative -right-2">Email Me!</Button>
 </div>
