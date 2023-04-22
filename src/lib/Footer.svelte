@@ -6,11 +6,11 @@
 </script>
 
 <footer
-  class="py-8 bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light"
+  class="bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light"
 >
-  <hr class="border" />
+  <hr class="border border-cr-grey-100 dark:border-cr-black-100" />
   <section
-    class="max-w-[987px] mx-auto px-4 md:px-6 flex flex-col items-start md:flex-row md:gap-14 justify-between"
+    class="max-w-[987px] mx-auto px-4 md:px-6 py-8 flex flex-col items-start md:flex-row md:gap-14 justify-between"
   >
     <section class="w-full md:w-auto flex flex-col gap-3">
       <Logo />
@@ -38,9 +38,9 @@
     </div>
   </section>
 
-  <hr class="border" />
+  <hr class="border border-cr-grey-100 dark:border-cr-black-100" />
 
-  <section class="max-w-[987px] mx-auto px-4 md:px-6">
+  <section class="max-w-[987px] mx-auto px-4 md:px-6 py-8">
     <div
       class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center md:justify-between"
     >

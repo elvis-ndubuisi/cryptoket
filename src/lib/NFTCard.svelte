@@ -29,7 +29,7 @@
       <span class="font-semibold">{artPrice}</span> eth
     </p>
 
-    <button type="button" class="text-dark flex items-center px-1">
+    <button type="button" class="text-dark flex gap-1 items-center px-1">
       <Icon icon="mdi:heart" />
       <p class="font-regular text-[10px]">{artLikes}</p>
     </button>

@@ -5,32 +5,36 @@
   export let sellerRank: number;
   export let sellerProfile: string;
   export let sellerPrice: number;
+
+  import dummyImg from "../assets/shirt-viz-screenshot.png";
 </script>
 
-<!-- TODO: h-[165px] md:h-[200px] -->
-
 <section
-  class="flex-shrink-0 snap-center snap-normal w-[130px] md:w-[180px] rounded-3xl border border-cr-grey-100 bg-cr-light text-cr-black-100 dark:border-cr-black-300 dark:bg-cr-black-300 dark:text-cr-light"
+  class="flex-shrink-0 snap-center snap-normal w-[130px] md:w-[180px] h-[165px] md:h-[200px] rounded-3xl border border-cr-grey-100 bg-cr-light text-cr-black-100 dark:border-cr-black-300 dark:bg-cr-black-300 dark:text-cr-light p-[9px] grid grid-rows-[] place-content-center relative"
 >
   <div
-    class="w-[24px] md:w-[33px] aspect-square rounded-full bg-cr-red-violet text-cr-light text-xs font-semibold grid place-content-center"
+    class="w-[24px] md:w-[33px] aspect-square rounded-full bg-cr-red-violet text-cr-light text-xs font-semibold grid place-content-center absolute top-[8px] left-[8px] md:top-[14px] md:left-[14px]"
   >
     {sellerRank}
   </div>
-  <div class="relative">
+
+  <div class="relative grid place-content-center mt-3 md:mt-4">
     <img
-      src={sellerProfile}
+      src={dummyImg}
       alt={`${sellerName}`}
-      class="w-[77px] h-[77px] rounded-full"
+      class="w-[77px] h-[77px] rounded-full object-cover bg-white"
     />
     <span
-      class="bg-[#00B247] p-1 aspect-square rounded-full text-sm text-cr-light"
+      class="absolute bottom-0 right-0 p-[3px] bg-[#00B247] rounded-full text-cr-light"
     >
-      <Icon icon="mdi-light:check" />
+      <Icon icon="mdi-light:check" width={15} height={15} />
     </span>
   </div>
-  <p class="font-semibold text-sm">{sellerName}</p>
-  <p class="text-sm font-regular uppercase">
+
+  <p class="font-semibold text-sm capitalize text-center my-[3px] md:my-[5px]">
+    {sellerName}
+  </p>
+  <p class="text-sm font-regular text-center uppercase">
     <span class="font-semibold">{sellerPrice}</span> eth
   </p>
 </section>
