@@ -1,10 +1,12 @@
 <script>
   import Button from "../lib/Button.svelte";
   import Label from "../lib/Label.svelte";
+
+  import iconlyImage from "../assets/Image.svg";
 </script>
 
-<section class="w-full max-w-[610px] mx-auto flex flex-col my-6">
-  <h1 class=" font-semibold text-[28px] dark:text-cr-light capitalize">
+<section class="w-full max-w-[610px] mx-auto flex flex-col py-6 px-2">
+  <h1 class=" font-semibold text-[28px] dark:text-cr-light capitalize mb-8">
     create item
   </h1>
   <form class="flex flex-col gap-5">
@@ -16,7 +18,7 @@
           </p>
 
           <img
-            src=""
+            src={iconlyImage}
             alt="nft item placeholder"
             class="w-[137px] aspect-square object-contain"
           />
