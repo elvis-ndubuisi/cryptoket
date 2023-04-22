@@ -11,9 +11,11 @@
     <img
       src={dummyImg}
       alt="profile background"
-      class="absolute top-0 left-0 -z-10 h-[80%] w-full object-cover object-center"
+      class="absolute top-0 left-0 -z-10 h-[65%] md:h-[80%] w-full object-cover object-center"
     />
-    <div class="flex flex-col items-center gap-2 relative top-[70%]">
+    <div
+      class="flex flex-col items-center gap-2 relative top-[50%] md:top-[70%]"
+    >
       <img
         src={dummyImg}
         alt=""
@@ -25,7 +27,7 @@
     </div>
   </section>
 
-  <section class="max-w-5xl mx-auto">
+  <section class="max-w-5xl mx-auto mt-8">
     <section class="flex items-center justify-between gap-3 my-4">
       <SearchBar />
 
