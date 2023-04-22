@@ -10,15 +10,15 @@
 >
   <hr class="border border-cr-grey-100 dark:border-cr-black-100" />
   <section
-    class="max-w-[987px] mx-auto px-4 md:px-6 py-8 flex flex-col items-start md:flex-row md:gap-14 justify-between"
+    class="max-w-[987px] mx-auto px-4 md:px-6 py-6 md:py-8 flex items-start md:flex-row md:gap-14 justify-between flex-wrap gap-y-6"
   >
-    <section class="w-full md:w-auto flex flex-col gap-3">
+    <section class="flex-1 md:flex-none w-full md:w-auto flex flex-col gap-6">
       <Logo />
       <h3 class="font-semibold text-base">Get the latest updates</h3>
       <Newsletter />
     </section>
 
-    <div class="flex flex-col gap-6">
+    <div class="w-1/2 md:w-auto flex flex-col gap-6">
       <h3 class="font-semibold text-xl">CryptoKet</h3>
       <ul class="flex flex-col gap-3">
         <li class="font-regular text-base capitalize">Explore</li>
@@ -27,7 +27,7 @@
       </ul>
     </div>
 
-    <div class="flex flex-col gap-6">
+    <div class="w-1/2 md:w-auto flex flex-col gap-6">
       <h3 class="font-semibold text-xl">Support</h3>
       <ul class="flex flex-col gap-3">
         <li class="font-regular text-base capitalize">help center</li>
@@ -40,9 +40,9 @@
 
   <hr class="border border-cr-grey-100 dark:border-cr-black-100" />
 
-  <section class="max-w-[987px] mx-auto px-4 md:px-6 py-8">
+  <section class="max-w-[987px] mx-auto px-4 md:px-6 py-6 md:py-8">
     <div
-      class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center md:justify-between"
+      class="max-w-7xl mx-auto flex flex-col gap-3 md:flex-row items-center justify-center md:justify-between"
     >
       <span class="font-semibold text-base"
         >CryptoKet, Inc. All Rights Reserved</span
