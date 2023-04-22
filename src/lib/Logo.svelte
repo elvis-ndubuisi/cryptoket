@@ -17,5 +17,10 @@
     alt="light logo"
     class="w-8 h-8 object-fill object-center block dark:hidden"
   />
-  <img src={cryptoket} alt="cryptket" class="hidden md:block" />
+  <!-- <img src={cryptoket} alt="cryptket" class="hidden md:block" /> -->
+  <h1
+    class="hidden md:block font-extrabold text-xl text-cr-black-100 dark:text-cr-light"
+  >
+    CryptoKet
+  </h1>
 </Link>
