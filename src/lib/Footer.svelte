@@ -48,10 +48,10 @@
         >CryptoKet, Inc. All Rights Reserved</span
       >
       <div class="flex items-center gap-5">
-        <a href="/" class="text-2xl"><Icon icon="mdi-light:instagram" /></a>
+        <a href="/" class="text-2xl"><Icon icon="mdi:youtube" /></a>
         <a href="/" class="text-2xl"><Icon icon="mdi:twitter" /></a>
-        <a href="/" class="text-2xl"><Icon icon="mdi:telegram" /></a>
-        <a href="/" class="text-2xl"> <Icon icon="mdi:facebook" /></a>
+        <a href="/" class="text-2xl"><Icon icon="mdi:mastodon" /></a>
+        <a href="/" class="text-2xl"> <Icon icon="ic:outline-discord" /></a>
       </div>
     </div>
   </section>

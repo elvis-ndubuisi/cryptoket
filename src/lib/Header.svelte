@@ -17,7 +17,7 @@
   <SearchBar />
 
   <nav
-    class="fixed top-0 left-0 h-[calc(100vh_-_70px)] md:pt-auto w-full md:w-auto bottom-0 md:static md:h-auto flex flex-col gap-4 items-center md:flex-row bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light"
+    class="fixed top-0 left-0 h-[calc(100vh_-_70px)] md:pt-auto w-full md:w-auto bottom-0 md:static md:h-auto hidden flex-col gap-4 items-center md:flex-row bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light"
   >
     <section
       class="md:flex-auto flex flex-col items-center gap-4 md:flex-row md:gap-5"
@@ -34,7 +34,12 @@
     </section>
   </nav>
 
-  <button type="button" on:click={handleMobileNav} class="block md:hidden">
-    <Icon icon="mdi:close" width={24} height={24} />
+  <button
+    type="button"
+    on:click={handleMobileNav}
+    class="flex-shrink-0 grid place-content-center md:hidden"
+  >
+    <Icon icon="ic:round-close" width={24} height={24} class="hidden" />
+    <Icon icon="ic:round-menu" width={32} height={32} class="block" />
   </button>
 </header>

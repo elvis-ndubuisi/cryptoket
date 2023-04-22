@@ -6,7 +6,7 @@
   import logoLight from "../assets/logo-light.svg";
 </script>
 
-<Link to="/" class="flex items-center gap-1">
+<Link to="/" class="flex-shrink-0 flex items-center gap-1">
   <img
     src={logoDark}
     alt="dark logo"
