@@ -3,8 +3,15 @@
   import Modal from "../lib/modal/Modal.svelte";
   import Checkout from "../lib/modal/Checkout.svelte";
   import Icon from "@iconify/svelte";
+  import tabBar from "../data/itemScreenTab";
 
   let showModal = false;
+  let activeTab = tabBar[0].id;
+  const tabContents = [
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "Sed quas molestias culpa illum dolores reprehenderit nobis vel similique totam eveniet ratione voluptatibus laborum, adipisci ad optio, beatae quasi minus numquam.",
+    "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  ];
 
   import dummyImg from "../assets/shirt-viz-screenshot.png";
 </script>
@@ -53,23 +60,33 @@
     <section
       class="flex items-center justify-left gap-4 border-b border-cr-grey-100 dark:border-cr-black-100"
     >
-      <button
-        class="pb-3 border-b-2 min-w-[70px] text-center capitalize font-semibold"
-        >details</button
-      >
-      <button
-        class="pb-3 border-b-2 min-w-[70px] text-center capitalize font-semibold"
-        >offer</button
-      >
-      <button
-        class="pb-3 border-b-2 min-w-[70px] text-center capitalize font-semibold"
-        >history</button
-      >
+      {#each tabBar as tab}
+        <button
+          class={`pb-3 ${
+            tab.id === activeTab ? "border-b-2" : ""
+          } min-w-[70px] text-center capitalize font-semibold`}
+          tabindex={tab.id}
+          on:click={(e) => {
+            activeTab = tab.id;
+          }}
+        >
+          {tab.name}
+        </button>
+      {/each}
     </section>
     <section class="max-w-md">
+      {#if activeTab === 0}
+        <p>{tabContents[0]}</p>
+      {:else if activeTab === 1}
+        <p>{tabContents[1]}</p>
+      {:else if activeTab === 2}
+        <p>{tabContents[2]}</p>
+      {/if}
       <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae, alias
-        iusto facilis consectetur temporibus earum!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed quas
+        molestias culpa illum dolores reprehenderit nobis vel similique totam
+        eveniet ratione voluptatibus laborum, adipisci ad optio, beatae quasi
+        minus numquam.
       </p>
     </section>
 
