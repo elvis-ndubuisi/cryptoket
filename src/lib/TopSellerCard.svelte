@@ -7,8 +7,10 @@
   export let sellerPrice: number;
 </script>
 
+<!-- TODO: h-[165px] md:h-[200px] -->
+
 <section
-  class="w-[130px] md:w-[180px] h-[165px] md:h-[200px] rounded-3xl border border-cr-grey-100 bg-cr-light text-cr-black-100 dark:border-cr-black-300 dark:bg-cr-black-300 dark:text-cr-light"
+  class="flex-shrink-0 snap-center snap-normal w-[130px] md:w-[180px] rounded-3xl border border-cr-grey-100 bg-cr-light text-cr-black-100 dark:border-cr-black-300 dark:bg-cr-black-300 dark:text-cr-light"
 >
   <div
     class="w-[24px] md:w-[33px] aspect-square rounded-full bg-cr-red-violet text-cr-light text-xs font-semibold grid place-content-center"

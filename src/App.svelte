@@ -30,5 +30,6 @@
   :global(html) {
     /* background-color: theme(colors.cr-black-200); */
     font-family: "Poppins", sans-serif;
+    scroll-behavior: smooth;
   }
 </style>
