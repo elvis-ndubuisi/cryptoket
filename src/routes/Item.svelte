@@ -34,7 +34,7 @@
     </div>
 
     <p class="font-regular text-sm">
-      From <b class="font-semibold">344.5ETH</b>. 20 of 50 available
+      From <b class="font-semibold">344.5 ETH</b> . 20 of 50 available
     </p>
 
     <div>
