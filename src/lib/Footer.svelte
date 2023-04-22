@@ -6,7 +6,7 @@
 </script>
 
 <footer
-  class="my-8 bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light"
+  class="py-8 bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light"
 >
   <hr class="border" />
   <section
