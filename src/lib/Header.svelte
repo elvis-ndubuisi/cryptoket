@@ -30,14 +30,35 @@
     <section
       class="md:flex-auto flex flex-col items-center gap-4 md:flex-row md:gap-5"
     >
-      <Link to="/" class="text-base font-semibold capitalize">explore</Link>
-      <Link to="item" class="text-base font-semibold capitalize">my items</Link>
-      <Link to="profile" class="text-base font-semibold capitalize">
+      <Link
+        to="/"
+        class="text-base font-semibold capitalize"
+        on:click={() => (showNav = false)}
+      >
+        explore
+      </Link>
+      <Link
+        to="item"
+        class="text-base font-semibold capitalize"
+        on:click={() => (showNav = false)}
+      >
+        my items
+      </Link>
+      <Link
+        to="profile"
+        class="text-base font-semibold capitalize"
+        on:click={() => (showNav = false)}
+      >
         profile
       </Link>
     </section>
     <section class="flex items-center gap-4">
-      <Button handleClick={() => navigate("item/create")}>create</Button>
+      <Button
+        handleClick={() => {
+          navigate("item/create");
+          showNav = false;
+        }}>create</Button
+      >
       <Button outline={true} handleClick={() => {}}>connect</Button>
     </section>
   </nav>
