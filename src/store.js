@@ -2,6 +2,8 @@ import { writable } from "svelte/store";
 
 export const user = writable(null);
 
+export const topBids = writable([]);
+
 export const asyncCheckAuthStatus = async () => {
   // this could be a call to Amplify currentUserInfo or another async auth library
   // you could use the response to set user if success
