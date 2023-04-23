@@ -1,9 +1,7 @@
 <script lang="ts">
   import Icon from "@iconify/svelte";
 
-  import pic from "../assets/shirt-viz-screenshot.png";
-
-  export let artUri: string = "../assets/shirt-viz-screenshot.png";
+  export let artUri: string;
   export let artName: string;
   export let artPrice: number;
   export let artLikes: number;
@@ -13,7 +11,7 @@
   class="w-[145px] md:w-[233px] h-[212px] md:h-[319px] bg-cr-light text-cr-black-100 dark:bg-cr-black-300 dark:text-cr-light px-2 py-3 md:p-2 rounded-xl shadow-lg"
 >
   <img
-    src={pic}
+    src={artUri}
     alt={artName}
     class="bg-cr-grey-100 rounded-xl h-[143.94px] md:h-[230px] object-cover object-center"
   />

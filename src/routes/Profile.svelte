@@ -4,6 +4,7 @@
   import NftCard from "../lib/NFTCard.svelte";
 
   import dummyImg from "../assets/shirt-viz-screenshot.png";
+  import { nftMock } from "../data/mockData";
 </script>
 
 <section>
@@ -39,18 +40,15 @@
     </section>
 
     <section class="grid grid-cols-2 gap-[10px] md:grid-cols-4">
-      <NftCard artLikes={23} artName="art name" artPrice={2.33} />
-      <NftCard artLikes={23} artName="art name" artPrice={2.33} />
-      <NftCard artLikes={23} artName="art name" artPrice={2.33} />
-      <NftCard artLikes={23} artName="art name" artPrice={2.33} />
-      <NftCard artLikes={23} artName="art name" artPrice={2.33} />
-      <NftCard artLikes={23} artName="art name" artPrice={2.33} />
-      <NftCard artLikes={23} artName="art name" artPrice={2.33} />
-      <NftCard artLikes={23} artName="art name" artPrice={2.33} />
+      {#each nftMock as nft}
+        <NftCard {...nft} />
+      {/each}
     </section>
 
     <div class="flex place-content-center mt-7 pb-5 px-2">
-      <Button styles="w-full max-w-xs" outline={true}>load more</Button>
+      <Button styles="w-full max-w-xs" outline={true} handleClick={() => {}}
+        >load more</Button
+      >
     </div>
   </section>
 </section>

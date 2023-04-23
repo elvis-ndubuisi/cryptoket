@@ -63,6 +63,6 @@
       />
     </Label>
 
-    <Button type="submit">create item</Button>
+    <Button type="submit" handleClick={() => {}}>create item</Button>
   </form>
 </section>

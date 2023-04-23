@@ -33,12 +33,8 @@
       </Link>
     </section>
     <section class="flex items-center gap-4">
-      <Button
-        on:_event={() => {
-          console.log("something");
-        }}>create</Button
-      >
-      <Button outline={true}>connect</Button>
+      <Button handleClick={() => navigate("item/create")}>create</Button>
+      <Button outline={true} handleClick={() => {}}>connect</Button>
     </section>
   </nav>
 

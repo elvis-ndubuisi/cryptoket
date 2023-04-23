@@ -1,7 +1,7 @@
 <script lang="ts">
   import Icon from "@iconify/svelte";
 
-  function handleChange() {}
+  let search = "";
 </script>
 
 <div
@@ -14,6 +14,6 @@
     id="search"
     placeholder="Search item here"
     class="flex-1 bg-transparent text-base outline-none font-regular placeholder:capitalize placeholder:text-xs"
-    on:change={handleChange}
+    bind:value={search}
   />
 </div>

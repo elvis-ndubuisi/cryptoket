@@ -1,8 +1,29 @@
-<script>
+<script lang="ts">
+  import { onMount, onDestroy } from "svelte";
+  import { fade, fly, slide } from "svelte/transition";
+  import Icon from "@iconify/svelte";
+
+  import { topBids } from "../store";
   import TopSellerCard from "../lib/TopSellerCard.svelte";
   import NftCard from "../lib/NFTCard.svelte";
   import Button from "../lib/Button.svelte";
-  import Icon from "@iconify/svelte";
+  import { nftMock } from "../data/mockData";
+
+  let bids: {
+    artUri: string;
+    artName: string;
+    artPrice: number;
+    artLikes: number;
+  }[];
+
+  const sub = topBids.subscribe((data) => (bids = data));
+
+  onMount(async () => {
+    // const res = fetch("google.com");
+    topBids.set(nftMock);
+  });
+
+  onDestroy(sub);
 </script>
 
 <section class="max-w-5xl mx-auto px-4 md:px-6 py-4 md:py-14">
@@ -144,19 +165,17 @@
       Hot Bids
     </h2>
     <section class="grid grid-cols-2 gap-[10px] md:grid-cols-4">
-      <NftCard artLikes={23} artName="art name" artPrice={2.33} />
-      <NftCard artLikes={23} artName="art name" artPrice={2.33} />
-      <NftCard artLikes={23} artName="art name" artPrice={2.33} />
-      <NftCard artLikes={23} artName="art name" artPrice={2.33} />
-      <NftCard artLikes={23} artName="art name" artPrice={2.33} />
-      <NftCard artLikes={23} artName="art name" artPrice={2.33} />
-      <NftCard artLikes={23} artName="art name" artPrice={2.33} />
-      <NftCard artLikes={23} artName="art name" artPrice={2.33} />
-      <NftCard artLikes={23} artName="art name" artPrice={2.33} />
+      {#each bids as nft}
+        <NftCard {...nft} />
+      {/each}
     </section>
   </section>
 
   <div class="flex place-content-center py-4 px-2">
-    <Button styles="w-full max-w-xs" outline={true}>load more</Button>
+    <Button
+      styles="w-full max-w-xs"
+      outline={true}
+      handleClick={(e) => console.log(e)}>load more</Button
+    >
   </div>
 </section>
