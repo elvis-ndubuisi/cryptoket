@@ -6,12 +6,14 @@
 </script>
 
 <section class="w-full max-w-[610px] mx-auto flex flex-col py-6 px-2">
-  <h1 class=" font-semibold text-[28px] dark:text-cr-light capitalize mb-8">
+  <h1 class="font-semibold text-[28px] dark:text-cr-light capitalize mb-8">
     create item
   </h1>
   <form class="flex flex-col gap-5">
     <Label labelFor="upload" labelName="upload file" styles="h-[329px]">
-      <section class="h-full w-full border-2 border-dashed rounded-[inherit]">
+      <section
+        class="h-full w-full border-2 border-dashed border-cr-grey-100 dark:border-cr-light rounded-lg"
+      >
         <div class="flex flex-col items-center justify-center h-full">
           <p class="font-semibold text-xl text-center">
             JPG, PNG, GIF, WEBM, MP3, MP4. Max 100mb
@@ -38,7 +40,7 @@
         name="name"
         id="name"
         placeholder="item name"
-        class="px-5 py-3 outline-none rounded-md bg-cr-black-100 font-regular text-base text-cr-light placeholder:capitalize placeholder:text-cr-light"
+        class="px-5 py-3 outline-none rounded-md bg-cr-light text-cr-black-100 dark:bg-cr-black-100 font-regular text-base dark:text-cr-light placeholder:capitalize placeholder:text-cr-grey-200 dark:placeholder:text-cr-light border-2 border-cr-grey-100 dark:border-none"
       />
     </Label>
 
@@ -49,7 +51,7 @@
         placeholder="Description of your item"
         cols="30"
         rows="10"
-        class="px-5 py-3 outline-none rounded-md bg-cr-black-100 font-regular text-base text-cr-light placeholder:capitalize placeholder:text-cr-light"
+        class="px-5 py-3 outline-none rounded-md bg-cr-light text-cr-black-100 dark:bg-cr-black-100 font-regular text-base dark:text-cr-light placeholder:capitalize placeholder:text-cr-grey-200 dark:placeholder:text-cr-light border-2 border-cr-grey-100 dark:border-none"
       />
     </Label>
 
@@ -59,7 +61,7 @@
         name="price"
         id="price"
         placeholder="Enter price"
-        class="px-5 py-3 outline-none rounded-md bg-cr-black-100 font-regular text-base text-cr-light placeholder:capitalize placeholder:text-cr-light"
+        class="px-5 py-3 outline-none rounded-md bg-cr-light text-cr-black-100 dark:bg-cr-black-100 font-regular text-base dark:text-cr-light placeholder:capitalize placeholder:text-cr-grey-200 dark:placeholder:text-cr-light border-2 border-cr-grey-100 dark:border-none"
       />
     </Label>
 

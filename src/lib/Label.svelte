@@ -5,7 +5,8 @@
 </script>
 
 <label for={labelFor} class={`flex flex-col gap-5 w-full ${styles}`}>
-  <span class="font-semibold text-2xl dark:text-cr-light capitalize"
+  <span
+    class="font-semibold text-2xl text-cr-black-100 dark:text-cr-light capitalize"
     >{labelName}</span
   >
   <slot />
