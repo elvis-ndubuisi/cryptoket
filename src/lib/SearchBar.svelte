@@ -13,7 +13,7 @@
     name="search"
     id="search"
     placeholder="Search item here"
-    class="flex-1 bg-transparent text-base outline-none font-regular placeholder:capitalize placeholder:text-xs"
+    class="flex-1 bg-transparent text-base outline-none font-regular placeholder:capitalize placeholder:text-xs max-w-[inherit]"
     bind:value={search}
   />
 </div>
