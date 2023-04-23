@@ -8,8 +8,10 @@
 
   const navigate = useNavigate();
 
-  function handleMobileNav() {
-    navigate("item/profile");
+  let showNav = false;
+
+  function handleMobileNav(e) {
+    showNav = !showNav;
   }
 </script>
 
@@ -21,7 +23,9 @@
   <SearchBar />
 
   <nav
-    class="absolute top-0 left-0 h-screen md:pt-auto w-full md:w-auto md:static md:h-auto flex flex-col gap-4 items-center justify-center md:flex-row bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light -z-20"
+    class={`absolute top-0 left-0 h-screen md:pt-auto w-full md:w-auto md:static md:h-auto ${
+      showNav ? "flex" : "hidden"
+    } md:flex flex-col gap-4 items-center justify-around md:flex-row bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light -z-20`}
   >
     <section
       class="md:flex-auto flex flex-col items-center gap-4 md:flex-row md:gap-5"
@@ -43,11 +47,11 @@
     on:click={handleMobileNav}
     class="flex-shrink-0 grid place-content-center md:hidden"
   >
-    <span class="hidden">
-      <Icon icon="ic:round-close" width={24} height={24} />
+    <span class={`${!showNav ? "hidden" : "block"}`}>
+      <Icon icon="ic:round-close" width={32} height={32} />
     </span>
 
-    <span class="block">
+    <span class={`${showNav ? "hidden" : "block"}`}>
       <Icon icon="ic:round-menu" width={32} height={32} />
     </span>
   </button>
