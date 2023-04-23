@@ -45,7 +45,7 @@
     </p>
 
     <div>
-      <p class="font-regular text-sm capitalize">creator</p>
+      <p class="font-regular text-sm capitalize mb-4">creator</p>
       <div class="flex items-center gap-3">
         <img
           src={dummyImg}
@@ -91,12 +91,14 @@
     </section>
 
     <section class="flex items-center justify-evenly gap-6">
-      <Button>Buy for <b>4.5ETH</b></Button>
-      <Button outline={true}>Make offer</Button>
+      <Button handleClick={() => (showModal = true)}
+        >Buy for <b>4.5ETH</b></Button
+      >
+      <Button outline={true} handleClick={() => {}}>Make offer</Button>
     </section>
   </section>
 </section>
 
 <Modal isOpen={showModal}>
-  <Checkout />
+  <Checkout cancel={() => (showModal = false)} />
 </Modal>
