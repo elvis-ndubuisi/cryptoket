@@ -5,17 +5,13 @@
   export let outline: boolean = false;
   export let styles: string = "";
   // export let name: string = "button";
+  export let handleClick: (e) => void;
 
   const dispatch = createEventDispatcher();
-
-  function onClick(event) {
-    // dispatch click event
-    dispatch("_event", { event: event });
-  }
 </script>
 
 <button
-  on:click={onclick}
+  on:click={(e) => handleClick(e)}
   {type}
   class={`capitalize rounded-lg font-semibold text-sm py-2 w-full min-w-[100px] h-[inherit] ${
     outline
