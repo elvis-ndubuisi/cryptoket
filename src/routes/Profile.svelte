@@ -32,11 +32,11 @@
     <section class="flex items-center justify-between gap-3 my-4">
       <SearchBar />
 
-      <select name="" id="">
+      <!-- <select name="" id="">
         <option value="m">recently added</option>
         <option value="m">most viewed</option>
         <option value="m">liked by you</option>
-      </select>
+      </select> -->
     </section>
 
     <section class="grid grid-cols-2 gap-[10px] md:grid-cols-4">
