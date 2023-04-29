@@ -164,7 +164,9 @@
     <h2 class="text-cr-h3 md:text-cr-h1 font-bold my-5 md:my-[30px] capitalize">
       Hot Bids
     </h2>
-    <section class="grid grid-cols-2 gap-[10px] md:grid-cols-4">
+    <section
+      class="grid place-items-center grid-cols-2 sm:grid-cols-4 gap-[10px] md:grid-cols-3 lg:grid-cols-4"
+    >
       {#each bids as nft}
         <NftCard {...nft} />
       {/each}

@@ -5,6 +5,19 @@
 
   import dummyImg from "../assets/shirt-viz-screenshot.png";
   import { nftMock } from "../data/mockData";
+
+  $: nfts = nftMock;
+
+  /**
+   * @param {{ target: { value: string; }; }} e
+   */
+  function searchNfts(e) {
+    const newdata = nftMock.filter((nft) => {
+      return nft.artName.toLowerCase().includes(e.target.value.toLowerCase());
+    });
+
+    nfts = newdata;
+  }
 </script>
 
 <section>
@@ -29,18 +42,14 @@
   </section>
 
   <section class="max-w-5xl mx-auto mt-8">
-    <section class="flex items-center justify-between gap-3 my-4">
-      <SearchBar />
-
-      <!-- <select name="" id="">
-        <option value="m">recently added</option>
-        <option value="m">most viewed</option>
-        <option value="m">liked by you</option>
-      </select> -->
+    <section class="flex items-center justify-center w-full gap-3 my-4">
+      <SearchBar handleSearch={(/** @type {any} */ e) => searchNfts(e)} />
     </section>
 
-    <section class="grid grid-cols-2 gap-[10px] md:grid-cols-4">
-      {#each nftMock as nft}
+    <section
+      class="grid place-items-center grid-cols-2 sm:grid-cols-4 gap-[10px] md:grid-cols-3 lg:grid-cols-4"
+    >
+      {#each nfts as nft}
         <NftCard {...nft} />
       {/each}
     </section>
