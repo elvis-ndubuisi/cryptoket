@@ -1,6 +1,34 @@
-<script>
+<script lang="ts">
   import Button from "../lib/Button.svelte";
   import Label from "../lib/Label.svelte";
+
+  let buttonStateText: "login" | "validating..." = "login";
+
+  const handleLogin = async (e: { target: HTMLFormElement }) => {
+    const formData = new FormData(e.target);
+    try {
+      buttonStateText = "validating...";
+      if (!formData.get("username") || !formData.get("password"))
+        throw new Error("invalid inputs");
+
+      const response = await fetch("https://sdafsdfasdfa", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "cors",
+        body: JSON.stringify({
+          username: formData.get("username"),
+          password: formData.get("password"),
+        }),
+      });
+    } catch (error) {
+      buttonStateText = "login";
+      console.log(error);
+    } finally {
+      buttonStateText = "login";
+    }
+  };
 </script>
 
 <section
@@ -12,7 +40,10 @@
     Welcome back
   </h1>
 
-  <form class="flex flex-col gap-5 w-full">
+  <form
+    class="flex flex-col gap-5 w-full"
+    on:submit|preventDefault|stopPropagation={handleLogin}
+  >
     <Label labelFor="username" labelName="username">
       <input
         type="text"
@@ -31,7 +62,9 @@
       />
     </Label>
 
-    <Button type="submit" handleClick={() => {}} styles="py-3">Login</Button>
+    <Button type="submit" handleClick={() => {}} styles="py-3"
+      >{buttonStateText}</Button
+    >
 
     <footer class="bg-cr-grey-100 dark:bg-cr-black-100 p-4 rounded-lg">
       <h3 class="text-center font-semibold text-lg capitalize">User 1</h3>
