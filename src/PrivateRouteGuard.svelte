@@ -1,20 +1,20 @@
 <script>
   import { useNavigate, useLocation } from "svelte-navigator";
+  import { user } from "./store";
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  let user = true; // should come from store.js
-
-  $: if (!user) {
+  function navigateToLogin() {
     navigate("/login", {
       state: { from: $location.pathname },
       replace: true,
     });
   }
+
+  $: if (!$user) navigateToLogin();
 </script>
 
-<!-- Add dollary symbol when user is coming from store.js -->
-{#if user}
+{#if $user}
   <slot />
 {/if}

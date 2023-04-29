@@ -9,6 +9,8 @@
   import NotFound from "./routes/NotFound.svelte";
   import Header from "./lib/Header.svelte";
   import Footer from "./lib/Footer.svelte";
+
+  import PrivateRoute from "./PrivateRoute.svelte";
 </script>
 
 <Router primary={false}>
@@ -16,10 +18,22 @@
   <main
     class="min-h-full bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light"
   >
-    <Route path="/" component={Home} />
-    <Route path="profile" component={Profile} />
-    <Route path="item/create" component={CreateItem} />
-    <Route path="item/*itemId" component={Item} />
+    <PrivateRoute path="/" let:location let:params>
+      <Home />
+    </PrivateRoute>
+
+    <PrivateRoute path="profile" let:location let:params>
+      <Profile />
+    </PrivateRoute>
+
+    <PrivateRoute path="item/create" let:location let:params>
+      <CreateItem />
+    </PrivateRoute>
+
+    <PrivateRoute path="item/:itemId" let:location let:params>
+      <Item />
+    </PrivateRoute>
+
     <Route path="login" component={Login} />
     <Route path="*" component={NotFound} />
   </main>

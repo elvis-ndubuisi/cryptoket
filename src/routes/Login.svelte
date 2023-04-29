@@ -1,34 +1,45 @@
 <script>
+  import { useLocation, useNavigate } from "svelte-navigator";
+  import { user } from "../store";
+
   import Button from "../lib/Button.svelte";
   import Label from "../lib/Label.svelte";
 
-  let buttonStateText = "login";
+  let navigate = useNavigate();
+  let location = useLocation();
 
-  const handleLogin = async (e) => {
-    const formData = new FormData(e.target);
+  let buttonStateText = "login";
+  let username = "";
+  let password = "";
+
+  async function handleLogin() {
     try {
       buttonStateText = "validating...";
-      if (!formData.get("username") || !formData.get("password"))
-        throw new Error("invalid inputs");
+      if (!username || !password) throw new Error("invalid inputs");
 
+      /*
       const response = await fetch("https://sdafsdfasdfa", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         mode: "cors",
-        body: JSON.stringify({
-          username: formData.get("username"),
-          password: formData.get("password"),
-        }),
+        body: JSON.stringify({ username, password }),
       });
+      */
+
+      // TODO: check if response is valie and we have a user
+      user.set({ username, password });
+      const from = ($location.state && $location.state.from) || "/"; // from route that redirected user to login.
+      buttonStateText = "Redirecting...";
+      setTimeout(() => {
+        navigate(from, { replace: true });
+      }, 1000);
     } catch (error) {
       buttonStateText = "login";
       console.log(error);
-    } finally {
-      buttonStateText = "login";
     }
-  };
+  }
 </script>
 
 <section
@@ -49,6 +60,7 @@
         type="text"
         name="username"
         id="username"
+        bind:value={username}
         class="px-5 py-3 outline-none rounded-md bg-cr-light text-cr-black-100 dark:bg-cr-black-100 font-regular text-base dark:text-cr-light placeholder:capitalize placeholder:text-cr-grey-200 dark:placeholder:text-cr-light border-2 border-cr-grey-100 dark:border-none"
       />
     </Label>
@@ -58,6 +70,7 @@
         type="password"
         name="password"
         id="password"
+        bind:value={password}
         class="px-5 py-3 outline-none rounded-md bg-cr-light text-cr-black-100 dark:bg-cr-black-100 font-regular text-base dark:text-cr-light placeholder:capitalize placeholder:text-cr-grey-200 dark:placeholder:text-cr-light border-2 border-cr-grey-100 dark:border-none"
       />
     </Label>

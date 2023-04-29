@@ -20,7 +20,7 @@
 >
   <Logo />
 
-  <SearchBar />
+  <SearchBar handleSearch={() => {}} />
 
   <nav
     class={`absolute top-0 left-0 h-screen md:pt-auto w-full md:w-auto md:static md:h-auto ${
