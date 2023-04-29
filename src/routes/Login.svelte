@@ -12,7 +12,7 @@
     Welcome back
   </h1>
 
-  <form class="flex flex-col gap-5">
+  <form class="flex flex-col gap-5 w-full">
     <Label labelFor="username" labelName="username">
       <input
         type="text"
@@ -37,23 +37,23 @@
       <h3 class="text-center font-semibold text-lg capitalize">User 1</h3>
       <div>
         <div class="flex items-center justify-between">
-          <p class="font-regular text-sm">username</p>
-          <p class="font-regular text-sm">username</p>
+          <p class="font-regular text-sm capitalize font-medium">username</p>
+          <p class="font-regular text-sm font-medium">username</p>
         </div>
         <div class="flex items-center justify-between">
-          <p class="font-regular text-sm">password</p>
-          <p class="font-regular text-sm">password</p>
+          <p class="font-regular text-sm font-medium capitalize">password</p>
+          <p class="font-regular text-sm font-medium">password</p>
         </div>
       </div>
       <h3 class="text-center font-semibold text-lg capitalize mt-3">user 2</h3>
       <div>
         <div class="flex items-center justify-between">
-          <p class="font-regular text-sm">username</p>
-          <p class="font-regular text-sm">username</p>
+          <p class="font-regular text-sm capitalize font-medium">username</p>
+          <p class="font-regular text-sm font-medium">username</p>
         </div>
         <div class="flex items-center justify-between">
-          <p class="font-regular text-sm">password</p>
-          <p class="font-regular text-sm">password</p>
+          <p class="font-regular text-sm capitalize font-medium">password</p>
+          <p class="font-regular text-sm font-medium">password</p>
         </div>
       </div>
     </footer>
