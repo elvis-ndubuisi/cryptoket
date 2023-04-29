@@ -1,10 +1,10 @@
-<script lang="ts">
+<script>
   import Button from "../lib/Button.svelte";
   import Label from "../lib/Label.svelte";
 
-  let buttonStateText: "login" | "validating..." = "login";
+  let buttonStateText = "login";
 
-  const handleLogin = async (e: { target: HTMLFormElement }) => {
+  const handleLogin = async (e) => {
     const formData = new FormData(e.target);
     try {
       buttonStateText = "validating...";
