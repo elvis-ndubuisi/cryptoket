@@ -1,10 +1,10 @@
 <script lang="ts">
   import Icon from "@iconify/svelte";
 
-  export let sellerName: String;
-  export let sellerRank: number;
+  export let sellerName: string;
+  export let sellerRank: string;
   export let sellerProfile: string;
-  export let sellerPrice: number;
+  export let sellerPrice: string;
 
   import dummyImg from "../assets/shirt-viz-screenshot.png";
 </script>
@@ -20,7 +20,7 @@
 
   <div class="relative grid place-content-center mt-3 md:mt-4">
     <img
-      src={dummyImg}
+      src={sellerProfile}
       alt={`${sellerName}`}
       class="w-[77px] h-[77px] rounded-full object-cover bg-white"
     />

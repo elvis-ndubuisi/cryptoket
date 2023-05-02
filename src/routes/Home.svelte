@@ -1,13 +1,12 @@
 <script lang="ts">
   import { onMount, onDestroy } from "svelte";
-  import { fade, fly, slide } from "svelte/transition";
   import Icon from "@iconify/svelte";
 
   import { topBids } from "../store";
   import TopSellerCard from "../lib/TopSellerCard.svelte";
   import NftCard from "../lib/NFTCard.svelte";
   import Button from "../lib/Button.svelte";
-  import { nftMock } from "../data/mockData";
+  import { nftMock, topSeller } from "../data/mockData";
 
   let bids: {
     artUri: string;
@@ -50,98 +49,16 @@
     </h2>
 
     <section
-      class="flex items-center gap-4 overflow-x-scroll snap-x snap-mandatory"
+      class="flex items-center gap-4 overflow-x-scroll snap-x snap-mandatory hide-scrollbar"
     >
-      <TopSellerCard
-        sellerName="mia name"
-        sellerPrice={23}
-        sellerProfile="/"
-        sellerRank={10}
-      />
-      <TopSellerCard
-        sellerName="mia name"
-        sellerPrice={23}
-        sellerProfile="/"
-        sellerRank={10}
-      />
-      <TopSellerCard
-        sellerName="mia name"
-        sellerPrice={23}
-        sellerProfile="/"
-        sellerRank={10}
-      />
-      <TopSellerCard
-        sellerName="mia name"
-        sellerPrice={23}
-        sellerProfile="/"
-        sellerRank={10}
-      />
-      <TopSellerCard
-        sellerName="mia name"
-        sellerPrice={23}
-        sellerProfile="/"
-        sellerRank={10}
-      />
-      <TopSellerCard
-        sellerName="mia name"
-        sellerPrice={23}
-        sellerProfile="/"
-        sellerRank={10}
-      />
-      <TopSellerCard
-        sellerName="mia name"
-        sellerPrice={23}
-        sellerProfile="/"
-        sellerRank={10}
-      />
-      <TopSellerCard
-        sellerName="mia name"
-        sellerPrice={23}
-        sellerProfile="/"
-        sellerRank={10}
-      />
-      <TopSellerCard
-        sellerName="mia name"
-        sellerPrice={23}
-        sellerProfile="/"
-        sellerRank={10}
-      />
-      <TopSellerCard
-        sellerName="mia name"
-        sellerPrice={23}
-        sellerProfile="/"
-        sellerRank={10}
-      />
-      <TopSellerCard
-        sellerName="mia name"
-        sellerPrice={23}
-        sellerProfile="/"
-        sellerRank={10}
-      />
-      <TopSellerCard
-        sellerName="mia name"
-        sellerPrice={23}
-        sellerProfile="/"
-        sellerRank={10}
-      />
-      <TopSellerCard
-        sellerName="mia name"
-        sellerPrice={23}
-        sellerProfile="/"
-        sellerRank={10}
-      />
-      <TopSellerCard
-        sellerName="mia name"
-        sellerPrice={23}
-        sellerProfile="/"
-        sellerRank={10}
-      />
-      <TopSellerCard
-        sellerName="mia name"
-        sellerPrice={23}
-        sellerProfile="/"
-        sellerRank={10}
-      />
+      {#each topSeller as seller}
+        <TopSellerCard
+          sellerName={seller.sellerName}
+          sellerPrice={seller.sellerPrice}
+          sellerProfile={seller.sellerPrice}
+          sellerRank={seller.sellerRank}
+        />
+      {/each}
     </section>
 
     <span class="absolute -left-3 top-2/3">
