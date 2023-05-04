@@ -1,4 +1,6 @@
 <script>
+  import { onMount, onDestroy } from "svelte";
+  import { useParams } from "svelte-navigator";
   import Button from "../lib/Button.svelte";
   import Modal from "../lib/modal/Modal.svelte";
   import Checkout from "../lib/modal/Checkout.svelte";
@@ -13,7 +15,13 @@
     "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   ];
 
+  export let params;
+
   import dummyImg from "../assets/shirt-viz-screenshot.png";
+
+  onMount(async () => {
+    console.log(params);
+  });
 </script>
 
 <section

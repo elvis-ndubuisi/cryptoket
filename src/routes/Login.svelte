@@ -1,6 +1,8 @@
 <script>
+  import jwt_decode from "jwt-decode";
   import { useLocation, useNavigate } from "svelte-navigator";
-  import { user } from "../store";
+  import { user, refreshToken } from "../store";
+  import API from "../api";
 
   import Button from "../lib/Button.svelte";
   import Label from "../lib/Label.svelte";
@@ -12,32 +14,55 @@
   let username = "";
   let password = "";
 
+  let showError = false;
+  let errorData;
+
   async function handleLogin() {
     try {
       buttonStateText = "validating...";
       if (!username || !password) throw new Error("invalid inputs");
 
-      /*
-      const response = await fetch("https://sdafsdfasdfa", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        mode: "cors",
-        body: JSON.stringify({ username, password }),
-      });
-      */
+      const response = await API.post(
+        "/cryptoket/user/auth/login",
+        JSON.stringify({ username, password })
+      );
 
-      // TODO: check if response is valie and we have a user
-      user.set({ username, password });
-      const from = ($location.state && $location.state.from) || "/"; // from route that redirected user to login.
+      if (response.status !== 200) throw new Error("Something happened");
+
+      const decodedUser = jwt_decode(response.data.accessToken);
+      sessionStorage.setItem("user", JSON.stringify(decodedUser));
+      user.set(decodedUser);
+
+      // API.defaults.headers.Authorization = `Bearer: ${response.data.accessToken}`;
+      API.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${response.data.accessToken}`;
+
+      sessionStorage.setItem(
+        "refreshToken",
+        JSON.stringify(response.data.refreshToken)
+      );
+      refreshToken.set(response.data.refreshToken);
+
+      /* from route that redirected user to login */
+      const from = ($location.state && $location.state.from) || "/";
+      /* Reset fields */
+      username = "";
+      password = "";
       buttonStateText = "Redirecting...";
+      /* Navigate to next page after delay */
       setTimeout(() => {
         navigate(from, { replace: true });
       }, 1000);
     } catch (error) {
       buttonStateText = "login";
-      console.log(error);
+      showError = true;
+      errorData =
+        error.response === undefined
+          ? error?.message
+          : typeof error.response.data === typeof ""
+          ? error.response.data
+          : error.response.data[0].message;
     }
   }
 </script>
@@ -78,6 +103,12 @@
     <Button type="submit" handleClick={() => {}} styles="py-3"
       >{buttonStateText}</Button
     >
+
+    {#if showError}
+      <section>
+        <p class="text-rose-500 lowercase">{errorData}</p>
+      </section>
+    {/if}
 
     <footer class="bg-cr-grey-100 dark:bg-cr-black-100 p-4 rounded-lg">
       <h3 class="text-center font-semibold text-lg capitalize">User 1</h3>

@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount, onDestroy } from "svelte";
   import Icon from "@iconify/svelte";
-
-  import { topBids } from "../store";
+  import API from "../api";
+  import { refreshToken, topBids } from "../store";
   import TopSellerCard from "../lib/TopSellerCard.svelte";
   import NftCard from "../lib/NFTCard.svelte";
   import Button from "../lib/Button.svelte";
@@ -13,13 +13,26 @@
     artName: string;
     artPrice: number;
     artLikes: number;
+    artId: string;
   }[];
+
+  /* Pagination variables */
+  let page = 1;
+  let size = 4;
 
   const sub = topBids.subscribe((data) => (bids = data));
 
   onMount(async () => {
-    // const res = fetch("google.com");
-    topBids.set(nftMock);
+    try {
+      const response = await API.get(`/cryptoket/nft?page=${page}`);
+      page = response.data.page;
+      size = response?.data?.size;
+      // topBids.set(response.data.data);
+      console.log(response.data.data);
+      topBids.set(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
   });
 
   onDestroy(sub);

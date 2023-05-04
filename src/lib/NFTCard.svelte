@@ -1,13 +1,15 @@
 <script lang="ts">
   import Icon from "@iconify/svelte";
 
+  export let artId: string;
   export let artUri: string;
   export let artName: string;
   export let artPrice: number;
   export let artLikes: number;
 </script>
 
-<section
+<a
+  href={`item/${artId}`}
   class="w-[145px] md:w-[233px] h-[212px] md:h-[319px] bg-cr-light text-cr-black-100 dark:bg-cr-black-300 dark:text-cr-light px-2 py-3 md:p-2 rounded-xl shadow-lg"
 >
   <img
@@ -32,4 +34,4 @@
       <p class="font-regular text-[10px]">{artLikes}</p>
     </button>
   </div>
-</section>
+</a>

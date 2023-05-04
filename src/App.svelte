@@ -10,7 +10,7 @@
   import Header from "./lib/Header.svelte";
   import Footer from "./lib/Footer.svelte";
 
-  import PrivateRoute from "./PrivateRoute.svelte";
+  import PrivateRoute from "./routes/PrivateRoute.svelte";
 </script>
 
 <Router primary={false}>
@@ -31,7 +31,7 @@
     </PrivateRoute>
 
     <PrivateRoute path="item/:itemId" let:location let:params>
-      <Item />
+      <Item {params} />
     </PrivateRoute>
 
     <Route path="login" component={Login} />
