@@ -1,13 +1,40 @@
 <script>
   import Button from "../lib/Button.svelte";
   import Label from "../lib/Label.svelte";
+
+  // const form = new FormData();
+  // form.append("my_field", "my value");
+  // form.append("my_buffer", new Blob([1, 2, 3]));
+  // form.append("my_file", fileInput.files[0]);
+  // axios.post("https://example.com", form);
+
+  //   axios.postForm('https://httpbin.org/post', {
+  //   my_field: 'my value',
+  //   my_buffer: new Blob([1,2,3]),
+  //   my_file:  fileInput.files // FileList will be unwrapped as sepate fields
+  // });
+
+  function handleDropZone() {}
+
+  let file, name, description, price;
+
+  async function handleSubmit() {
+    console.log(file);
+    console.log(name);
+    console.log(description);
+    console.log(price);
+  }
 </script>
 
 <section class="w-full max-w-[610px] mx-auto flex flex-col py-6 px-2">
   <h1 class="font-semibold text-[28px] dark:text-cr-light capitalize mb-8">
     create item
   </h1>
-  <form class="flex flex-col gap-5">
+  <form
+    class="flex flex-col gap-5"
+    enctype="multipart/form-data"
+    on:submit|preventDefault={handleSubmit}
+  >
     <Label labelFor="upload" labelName="upload file" styles="h-[329px]">
       <section
         class="h-full w-full border-2 border-dashed border-cr-grey-100 dark:border-cr-light rounded-lg"
@@ -39,7 +66,7 @@
             <span class="font-regular">or</span> browse media on your device
           </p>
         </div>
-        <input type="file" name="upload" id="upload" hidden />
+        <input type="file" name="upload" id="upload" hidden bind:files={file} />
       </section>
     </Label>
 
@@ -48,6 +75,7 @@
         type="text"
         name="name"
         id="name"
+        bind:value={name}
         placeholder="item name"
         class="px-5 py-3 outline-none rounded-md bg-cr-light text-cr-black-100 dark:bg-cr-black-100 font-regular text-base dark:text-cr-light placeholder:capitalize placeholder:text-cr-grey-200 dark:placeholder:text-cr-light border-2 border-cr-grey-100 dark:border-none"
       />
@@ -56,6 +84,7 @@
     <Label labelFor="description" labelName="description">
       <textarea
         name="description"
+        bind:value={description}
         id="description"
         placeholder="Description of your item"
         cols="30"
@@ -68,6 +97,7 @@
       <input
         type="text"
         name="price"
+        bind:value={price}
         id="price"
         placeholder="Enter price"
         class="px-5 py-3 outline-none rounded-md bg-cr-light text-cr-black-100 dark:bg-cr-black-100 font-regular text-base dark:text-cr-light placeholder:capitalize placeholder:text-cr-grey-200 dark:placeholder:text-cr-light border-2 border-cr-grey-100 dark:border-none"

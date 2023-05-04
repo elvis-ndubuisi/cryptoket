@@ -1,11 +1,12 @@
 <script>
   import { onMount, onDestroy } from "svelte";
-  import { useParams } from "svelte-navigator";
+  import { navigate } from "svelte-navigator";
   import Button from "../lib/Button.svelte";
   import Modal from "../lib/modal/Modal.svelte";
   import Checkout from "../lib/modal/Checkout.svelte";
   import Icon from "@iconify/svelte";
   import tabBar from "../data/itemScreenTab";
+  import API from "../api";
 
   let showModal = false;
   let activeTab = tabBar[0].id;
@@ -15,12 +16,24 @@
     "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   ];
 
+  let isFetching = false;
+  let data = {};
+
   export let params;
 
   import dummyImg from "../assets/shirt-viz-screenshot.png";
 
+  const blogPostRequest = fetch("some/blog/post");
+
   onMount(async () => {
-    console.log(params);
+    try {
+      isFetching = true;
+      const response = await API.get(`/nft/:${params?.itemId}`);
+    } catch (error) {
+      if (error.response.status === 401) console.log("no authed");
+    } finally {
+      isFetching = false;
+    }
   });
 </script>
 
@@ -106,6 +119,14 @@
     </section>
   </section>
 </section>
+<!-- 
+{#await blogPostRequest}
+<h1 class="visuallyHidden" use:registerFocus>
+	The blog post is being loaded...
+</h1>
+{:then data}
+<BlogPost {data} />
+{/await} -->
 
 <Modal isOpen={showModal}>
   <Checkout cancel={() => (showModal = false)} />

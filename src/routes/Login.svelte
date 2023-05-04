@@ -23,7 +23,7 @@
       if (!username || !password) throw new Error("invalid inputs");
 
       const response = await API.post(
-        "/cryptoket/user/auth/login",
+        "/user/auth/login",
         JSON.stringify({ username, password })
       );
 
@@ -60,9 +60,9 @@
       errorData =
         error.response === undefined
           ? error?.message
-          : typeof error.response.data === typeof ""
-          ? error.response.data
-          : error.response.data[0].message;
+          : typeof error?.response.data === typeof ""
+          ? error?.response.data
+          : error?.response.data[0].message;
     }
   }
 </script>

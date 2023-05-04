@@ -8,6 +8,12 @@
   import Button from "../lib/Button.svelte";
   import { nftMock, topSeller } from "../data/mockData";
 
+  import { useLocation, useNavigate } from "svelte-navigator";
+
+  const controller = new AbortController();
+  const location = useLocation();
+  const navigate = useNavigate();
+
   let bids: {
     artUri: string;
     artName: string;
@@ -20,22 +26,43 @@
   let page = 1;
   let size = 4;
 
+  /* Fetching states */
+  let fetching = false;
+  const fetchText = "Loading Nfts.....";
+
   const sub = topBids.subscribe((data) => (bids = data));
+
+  async function handleFetchMore() {
+    page += 1;
+    try {
+      fetching = true;
+      const response = await API.get(`/nft?page=${page}`);
+    } catch (error) {
+    } finally {
+      fetching = false;
+    }
+  }
 
   onMount(async () => {
     try {
-      const response = await API.get(`/cryptoket/nft?page=${page}`);
+      const response = await API.get(`/nft?page=${page}`, {
+        signal: controller.signal,
+      });
       page = response.data.page;
       size = response?.data?.size;
       // topBids.set(response.data.data);
       console.log(response.data.data);
       topBids.set(response.data.data);
     } catch (error) {
+      error?.response.status === 403 && navigate("/login", { replace: false });
       console.log(error);
     }
   });
 
-  onDestroy(sub);
+  onDestroy(() => {
+    controller.abort();
+    sub;
+  });
 </script>
 
 <section class="max-w-5xl mx-auto px-4 md:px-6 py-4 md:py-14">
@@ -107,7 +134,8 @@
     <Button
       styles="w-full max-w-xs"
       outline={true}
-      handleClick={(e) => console.log(e)}>load more</Button
+      handleClick={(e) => handleFetchMore()}
+      >{fetching ? fetchText : "load more"}</Button
     >
   </div>
 </section>

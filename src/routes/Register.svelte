@@ -23,7 +23,7 @@
       if (!username || !password) throw new Error("invalid inputs");
 
       const response = await API.post(
-        "/cryptoket/user/auth/register",
+        "/user/auth/join",
         JSON.stringify({ username, password })
       );
 
