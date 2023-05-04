@@ -6,7 +6,7 @@
   import Checkout from "../lib/modal/Checkout.svelte";
   import Icon from "@iconify/svelte";
   import tabBar from "../data/itemScreenTab";
-  import API from "../api";
+  import API from "../utils/api";
 
   let showModal = false;
   let activeTab = tabBar[0].id;

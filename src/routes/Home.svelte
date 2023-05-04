@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount, onDestroy } from "svelte";
   import Icon from "@iconify/svelte";
-  import API from "../api";
-  import { refreshToken, topBids } from "../store";
+  import API from "../utils/api";
+  import { refreshToken, topBids } from "../utils/store";
   import TopSellerCard from "../lib/TopSellerCard.svelte";
   import NftCard from "../lib/NFTCard.svelte";
   import Button from "../lib/Button.svelte";

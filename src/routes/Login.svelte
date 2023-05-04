@@ -1,8 +1,8 @@
 <script>
   import jwt_decode from "jwt-decode";
   import { useLocation, useNavigate } from "svelte-navigator";
-  import { user, refreshToken } from "../store";
-  import API from "../api";
+  import { user, refreshToken } from "../utils/store";
+  import API from "../utils/api";
 
   import Button from "../lib/Button.svelte";
   import Label from "../lib/Label.svelte";
