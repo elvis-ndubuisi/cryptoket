@@ -9,7 +9,7 @@ This template should help get you started developing with Svelte in Vite.
 ## **🧑‍🏭 User Actions**
 
 - Login to account (authentication access)
-- Create new item (Upload data + image)
+- Create a new item (Upload data + image)
 - Fetch Nft items.
 
 ## **🛠️ Local setup 🖥️**
@@ -21,36 +21,36 @@ This template should help get you started developing with Svelte in Vite.
 ## **Tech Stacks & Framework**
 
 - **🍰 Frontend UI**
-  - SvelteJs : UI Library 😃
-  - TailwindCss : class-based 🎨 css style
-  - Iconify : Icon library 👃
-  - ViteJs : 🤔
+  - SvelteJs: UI Library 😃
+  - TailwindCss: class-based 🎨 CSS style
+  - Iconify: Icon library 👃
+  - ViteJs: 🤔
 - **🍝 Backend & API 🌵**
-  - MongoDb : Database 🪣
+  - MongoDB: Database 🪣
   - ExpressJs : API & routes 🔌
   - JWT authentication 🔏
-  - Cloudinary : Image storage (cloud) 🧃
+  - Cloudinary: Image storage (cloud) 🧃
 
 ## Challenges & Observations
 
-- **States & the concept of `reactivity`** :
+- **States & the concept of `reactivity`**: something.
 
-- **Stores in svelte** : The whole concept of external stores felt totally different in svelte. First question i had was _why attach `$:` to store values and why some blog contents ommited k_
+**Stores in `SvelteJs`**: The whole concept of external stores felt different in Svelte. The first question I had was _why attach `$:` to store values and why some blog contents were omitted_.
 
-- **Passing functions as props** : Passing props in svelte components required using the `export` keyword. I always had to declare arrow functions using the `let` keyword. Although i intentionally 🧐 avoided using the `dispatch` in svelte.
+- **Passing functions as props**: Passing props in svelte components is required using the `export` keyword. I always had to declare arrow functions using the `let` keyword. Although I intentionally 🧐 avoided using the `dispatch` in Svelte.
 
-- **Stores & Context in svelte** : store
+- **Stores & Context in SvelteJS**: store
 
 ## **Credits 🤟**
 
-The UI design figma file used for this project was created by [designer]("https//designer") & downloaded for free at [UI8.com]('https://ui8.com')
+The UI design figma file used for this project was created by the [designer](https//designer) & downloaded for free at [UI8.com](https://ui8.com)
 
 ## **Contact Me 💓**
 
-- [Send me a mail]("https://mail")
+- [Send me a mail](https://mail)
 
-- [Visit Porfolio]("https://")
+- [Visit Portfolio](https://)
 
-- [DM on twitter]("https/twitter")
+- [DM on Twitter](https/twitter)
 
-- [LinkedIn Profile]("https/twitter")
+- [LinkedIn Profile](https/twitter)
