@@ -4,6 +4,7 @@
   import Home from "./routes/Home.svelte";
   import Profile from "./routes/Profile.svelte";
   import Login from "./routes/Login.svelte";
+  import Register from "./routes/Register.svelte";
   import Item from "./routes/Item.svelte";
   import CreateItem from "./routes/CreateItem.svelte";
   import NotFound from "./routes/NotFound.svelte";
@@ -35,6 +36,7 @@
     </PrivateRoute>
 
     <Route path="login" component={Login} />
+    <Route path="register" component={Register} />
     <Route path="*" component={NotFound} />
   </main>
   <Footer />
