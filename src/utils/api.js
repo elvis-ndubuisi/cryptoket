@@ -1,5 +1,4 @@
 import axios from "axios";
-import { user } from "./store";
 
 let refToken = JSON.parse(sessionStorage.getItem("refreshToken"));
 
@@ -16,14 +15,14 @@ let shouldRefresh = false;
 API.interceptors.response.use(
   (res) => res,
   async (error) => {
-    const originalReq = error.config;
+    // const originalReq = error.config;
     if (
       (error.response.status === 403 || error.response.status === 401) &&
-      // !shouldRefresh
-      !originalReq._retry
+      !shouldRefresh
+      // !originalReq._retry
     ) {
-      // shouldRefresh = true; // start request;
-      originalReq._retry = true;
+      shouldRefresh = true; // start request;
+      // originalReq._retry = true;
       const refResponse = await API.post("/user/auth/refresh", {
         refreshToken: refToken,
       });
@@ -33,11 +32,11 @@ API.interceptors.response.use(
           "Authorization"
         ] = `Bearer ${refResponse.data.accessToken}`;
 
-        return API(originalReq);
+        return API(error.config);
       }
     }
-    // shouldRefresh = false; // Ends request after first execution
-    originalReq._retry = false;
+    shouldRefresh = false; // Ends request after first execution
+    // originalReq._retry = false;
     return Promise.reject(error);
   }
 );

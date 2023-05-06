@@ -2,8 +2,13 @@
   import Button from "../Button.svelte";
 
   export let cancel: () => void;
-
-  import dummyImg from "../../assets/shirt-viz-screenshot.png";
+  export let data: {
+    name: string;
+    uri: string;
+    price: number;
+    type: string;
+    authorName: string;
+  };
 </script>
 
 <section class="flex flex-col">
@@ -23,17 +28,17 @@
 
     <div class="w-full flex items-center justify-between gap-3">
       <img
-        src={dummyImg}
+        src={data.uri}
         alt=" "
         class="h-[52px] md:h-[104px] aspect-square object-cover object-center"
       />
       <div class="flex-1 flex flex-col">
-        <p class="font-semibold text-sm capitalize">Mia amaya</p>
-        <p class="font-regular text-sm capitalize">Mia amaya</p>
+        <p class="font-semibold text-sm capitalize">{data.name}</p>
+        <p class="font-regular text-sm capitalize">{data.authorName}</p>
       </div>
 
       <p class="font-regular text-base">
-        5.4 <b class="uppercase font-semibold">eth</b>
+        {data.price} <b class="uppercase font-semibold">{data.type}</b>
       </p>
     </div>
 
@@ -41,7 +46,7 @@
       class="w-full flex items-center justify-between text-base font-semibold capitalize"
     >
       <p>total</p>
-      <p>5.4 <b class="uppercase font-semibold">eth</b></p>
+      <p>{data.price} <b class="uppercase font-semibold">{data.type}</b></p>
     </div>
   </div>
   <hr class="border border-cr-grey-300 my-6 md:my-[30px]" />

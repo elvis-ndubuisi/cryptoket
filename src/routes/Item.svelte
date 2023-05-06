@@ -26,12 +26,10 @@
 
   onMount(async () => {
     isFetching = true;
-    let nftId = params.itemId;
     try {
       const response = await API.get(`/nft/id/${params.itemId}`);
       const { nft } = response.data;
       data = nft;
-      console.log(data);
     } catch (error) {
       console.log(error);
       return null;
@@ -42,9 +40,19 @@
 </script>
 
 {#if isFetching}
-  <h2 class="text-center font-medim text-green-500">Fetching NFT data...</h2>
+  <section
+    class="max-w-5xl mx-auto min-h-[70vh] flex items-center justify-center pt-6"
+  >
+    <h2 class="text-center text-2xl font-medim text-green-500">
+      Fetching NFT data...
+    </h2>
+  </section>
 {:else if isError}
-  <h2 class="text-center font-medium text-red-500">Something went wrong</h2>
+  <section
+    class="max-w-5xl mx-auto min-h-[70vh] flex items-center justify-center pt-6"
+  >
+    <h2 class="text-center font-medium text-red-500">Something went wrong</h2>
+  </section>
 {:else}
   <section
     class="max-w-5xl mx-auto min-h-[70vh] flex flex-col md:flex-row gap-5 pt-6"
@@ -131,5 +139,14 @@
 {/if}
 
 <Modal isOpen={showModal}>
-  <Checkout cancel={() => (showModal = false)} />
+  <Checkout
+    cancel={() => (showModal = false)}
+    data={{
+      uri: data?.nftImage?.secure_url,
+      name: data?.name,
+      price: data?.price,
+      type: data?.cryptoType,
+      authorName: "fix this",
+    }}
+  />
 </Modal>

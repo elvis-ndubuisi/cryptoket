@@ -6,18 +6,17 @@
   import { genRandomNumber } from "../utils/mod";
 
   import dummyImg from "../assets/shirt-viz-screenshot.png";
-  import { nftMock } from "../data/mockData";
   import { onMount } from "svelte";
   import API from "../utils/api";
 
-  $: nfts = [];
+  $: nfts = $userNfts;
 
   $: page = 1;
   $: size = 6;
 
   function searchNfts(e) {
     const newdata = $userNfts.filter((nft) => {
-      return nft.artName.toLowerCase().includes(e.target.value.toLowerCase());
+      return nft.name.toLowerCase().includes(e.target.value.toLowerCase());
     });
 
     nfts = newdata;
@@ -49,8 +48,7 @@
       !(response.status === 200) && console.log("Something went wrong");
       page = response.data.page;
       size = response.data.size && response.data.size;
-      console.log(response.data);
-      // userNfts.update((data) => (data = [data, ...response.data?.nfts]));
+      userNfts.update((data) => (data = response.data));
     } catch (error) {
       console.log(error);
     }
