@@ -16,11 +16,14 @@ let shouldRefresh = false;
 API.interceptors.response.use(
   (res) => res,
   async (error) => {
+    const originalReq = error.config;
     if (
       (error.response.status === 403 || error.response.status === 401) &&
-      !shouldRefresh
+      // !shouldRefresh
+      !originalReq._retry
     ) {
-      shouldRefresh = true; // start request;
+      // shouldRefresh = true; // start request;
+      originalReq._retry = true;
       const refResponse = await API.post("/user/auth/refresh", {
         refreshToken: refToken,
       });
@@ -30,10 +33,11 @@ API.interceptors.response.use(
           "Authorization"
         ] = `Bearer ${refResponse.data.accessToken}`;
 
-        return API(error.config);
+        return API(originalReq);
       }
     }
-    shouldRefresh = false;
+    // shouldRefresh = false; // Ends request after first execution
+    originalReq._retry = false;
     return Promise.reject(error);
   }
 );

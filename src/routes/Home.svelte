@@ -6,6 +6,7 @@
   import TopSellerCard from "../lib/TopSellerCard.svelte";
   import NftCard from "../lib/NFTCard.svelte";
   import Button from "../lib/Button.svelte";
+  import { genRandomNumber } from "../utils/mod";
   import { nftMock, topSeller } from "../data/mockData";
 
   import { useLocation, useNavigate } from "svelte-navigator";
@@ -14,12 +15,11 @@
   const location = useLocation();
   const navigate = useNavigate();
 
-  let bids: {
-    artUri: string;
-    artName: string;
-    artPrice: number;
-    artLikes: number;
-    artId: string;
+  let topBidsData: {
+    _id: string;
+    name: string;
+    price: string;
+    nftImage: { secure_url: string };
   }[];
 
   /* Pagination variables */
@@ -30,7 +30,7 @@
   let fetching = false;
   const fetchText = "Loading Nfts.....";
 
-  const sub = topBids.subscribe((data) => (bids = data));
+  const sub = topBids.subscribe((data) => (topBidsData = data));
 
   async function handleFetchMore() {
     page += 1;
@@ -44,18 +44,19 @@
   }
 
   onMount(async () => {
+    if (topBidsData.length > 0) {
+      return;
+    }
     try {
       const response = await API.get(`/nft?page=${page}`, {
         signal: controller.signal,
       });
       page = response.data.page;
       size = response?.data?.size;
-      // topBids.set(response.data.data);
-      console.log(response.data.data);
       topBids.set(response.data.data);
     } catch (error) {
-      error?.response.status === 403 && navigate("/login", { replace: false });
-      console.log(error);
+      // error?.response.status === 403 && navigate("/login", { replace: false });
+      // console.log(error);
     }
   });
 
@@ -124,8 +125,14 @@
     <section
       class="grid place-items-center grid-cols-2 sm:grid-cols-4 gap-[10px] md:grid-cols-3 lg:grid-cols-4"
     >
-      {#each bids as nft}
-        <NftCard {...nft} />
+      {#each topBidsData as nft}
+        <NftCard
+          artId={nft._id}
+          artLikes={genRandomNumber()}
+          artName={nft.name}
+          artPrice={parseInt(nft.price)}
+          artUri={nft.nftImage.secure_url}
+        />
       {/each}
     </section>
   </section>

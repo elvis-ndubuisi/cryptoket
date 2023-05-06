@@ -1,28 +1,47 @@
 <script>
   import Button from "../lib/Button.svelte";
   import Label from "../lib/Label.svelte";
-
-  // const form = new FormData();
-  // form.append("my_field", "my value");
-  // form.append("my_buffer", new Blob([1, 2, 3]));
-  // form.append("my_file", fileInput.files[0]);
-  // axios.post("https://example.com", form);
-
-  //   axios.postForm('https://httpbin.org/post', {
-  //   my_field: 'my value',
-  //   my_buffer: new Blob([1,2,3]),
-  //   my_file:  fileInput.files // FileList will be unwrapped as sepate fields
-  // });
+  import API from "../utils/api";
 
   function handleDropZone() {}
 
-  let file, name, description, price;
+  let file, name, description, price, cryptoType;
+  let btnIndicator = "create NFT item";
+  let errorMsg = "";
+  $: isError = false;
 
   async function handleSubmit() {
-    console.log(file);
-    console.log(name);
-    console.log(description);
-    console.log(price);
+    if (!file) {
+      isError = true;
+      errorMsg = "No file selected";
+      return;
+    }
+
+    const form = new FormData();
+    form.append("image", file[0]);
+    form.append("name", name);
+    form.append("description", description);
+    form.append("price", price);
+    form.append("cryptoType", cryptoType);
+
+    try {
+      btnIndicator = "Submitting...";
+      const response = await API.postForm("/nft/create", form);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      btnIndicator = "create NFT item";
+    }
+  }
+
+  $: {
+    if (isError) {
+      setTimeout(() => {
+        isError = false;
+        errorMsg = "";
+      }, 4000);
+    }
   }
 </script>
 
@@ -30,6 +49,11 @@
   <h1 class="font-semibold text-[28px] dark:text-cr-light capitalize mb-8">
     create item
   </h1>
+
+  {#if isError}
+    <p class="text-rose-500 text-center">{errorMsg}</p>
+  {/if}
+
   <form
     class="flex flex-col gap-5"
     enctype="multipart/form-data"
@@ -77,7 +101,7 @@
         id="name"
         bind:value={name}
         placeholder="item name"
-        class="px-5 py-3 outline-none rounded-md bg-cr-light text-cr-black-100 dark:bg-cr-black-100 font-regular text-base dark:text-cr-light placeholder:capitalize placeholder:text-cr-grey-200 dark:placeholder:text-cr-light border-2 border-cr-grey-100 dark:border-none"
+        class="px-5 py-3 outline-none rounded-md bg-cr-light text-cr-black-100 dark:bg-cr-black-100 font-regular text-base dark:text-cr-light placeholder:capitalize placeholder:text-cr-grey-200 dark:placeholder:text-cr-light dark:placeholder:opacity-50 border-2 border-cr-grey-100 dark:border-none"
       />
     </Label>
 
@@ -89,21 +113,34 @@
         placeholder="Description of your item"
         cols="30"
         rows="10"
-        class="px-5 py-3 outline-none rounded-md bg-cr-light text-cr-black-100 dark:bg-cr-black-100 font-regular text-base dark:text-cr-light placeholder:capitalize placeholder:text-cr-grey-200 dark:placeholder:text-cr-light border-2 border-cr-grey-100 dark:border-none"
+        class="px-5 py-3 outline-none rounded-md bg-cr-light text-cr-black-100 dark:bg-cr-black-100 font-regular text-base dark:text-cr-light placeholder:capitalize placeholder:text-cr-grey-200 dark:placeholder:text-cr-light dark:placeholder:opacity-50 border-2 border-cr-grey-100 dark:border-none"
       />
     </Label>
 
     <Label labelFor="price" labelName="price">
-      <input
-        type="text"
-        name="price"
-        bind:value={price}
-        id="price"
-        placeholder="Enter price"
-        class="px-5 py-3 outline-none rounded-md bg-cr-light text-cr-black-100 dark:bg-cr-black-100 font-regular text-base dark:text-cr-light placeholder:capitalize placeholder:text-cr-grey-200 dark:placeholder:text-cr-light border-2 border-cr-grey-100 dark:border-none"
-      />
+      <div
+        class="flex items-center justify-between px-5 dark:bg-cr-black-100 bg-cr-light rounded-md"
+      >
+        <input
+          type="text"
+          name="price"
+          bind:value={price}
+          id="price"
+          placeholder="Enter price"
+          class="py-3 outline-none bg-cr-light text-cr-black-100 dark:bg-cr-black-100 font-regular text-base dark:text-cr-light placeholder:capitalize placeholder:text-cr-grey-200 dark:placeholder:text-cr-light dark:placeholder:opacity-50 border-2 border-cr-grey-100 dark:border-none flex-grow-0 w-auto"
+        />
+
+        <select
+          bind:value={cryptoType}
+          class="py-3 outline-none bg-cr-light text-cr-black-100 dark:bg-cr-black-100 font-regular text-base dark:text-cr-light placeholder:capitalize placeholder:text-cr-grey-200 dark:placeholder:text-cr-light dark:placeholder:opacity-50 border-2 border-cr-grey-100 dark:border-none font-medium uppercase"
+        >
+          <option value="eth">eth</option>
+          <option value="sol">sol</option>
+          <option value="mol">mol</option>
+        </select>
+      </div>
     </Label>
 
-    <Button type="submit" handleClick={() => {}}>create item</Button>
+    <Button type="submit" handleClick={() => {}}>{btnIndicator}</Button>
   </form>
 </section>

@@ -11,3 +11,5 @@ export const refreshToken = writable(
 );
 
 export const topBids = writable([]);
+
+export const userNfts = writable([]);
