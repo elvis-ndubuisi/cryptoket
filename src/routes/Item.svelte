@@ -30,6 +30,7 @@
       const response = await API.get(`/nft/id/${params.itemId}`);
       const { nft } = response.data;
       data = nft;
+      console.log(data.author.username);
     } catch (error) {
       console.log(error);
       return null;
@@ -94,7 +95,9 @@
             alt="profile username"
             class="w-11 aspect-square rounded-full object-cover object-center"
           />
-          <p class="font-semibold text-lg capitalize">mia ayana</p>
+          <p class="font-semibold text-lg capitalize">
+            {data?.author?.username}
+          </p>
         </div>
       </div>
 
