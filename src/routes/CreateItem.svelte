@@ -1,14 +1,28 @@
 <script>
+  // @ts-nocheck
+
   import Button from "../lib/Button.svelte";
   import Label from "../lib/Label.svelte";
   import API from "../utils/api";
+  import { topBids, userNfts } from "../utils/store";
+  import { useNavigate } from "svelte-navigator";
 
   function handleDropZone() {}
 
+  const navigate = useNavigate();
+
   let file, name, description, price, cryptoType;
+  let nameCount = 0,
+    descCount = 0;
   let btnIndicator = "create NFT item";
   let errorMsg = "";
   $: isError = false;
+
+  // Error messages
+  let fileErrMessage = "";
+  let nameErrMessage = "";
+  let descErrMessage = "";
+  let priceErrMessage = "";
 
   async function handleSubmit() {
     if (!file) {
@@ -28,19 +42,32 @@
       btnIndicator = "Submitting...";
       const response = await API.postForm("/nft/create", form);
       console.log(response.data);
+      // Add data to stores.
+      topBids.update((data) => {
+        [...data, response.data];
+      });
+      // userNfts.update();
+      navigate("/profile");
     } catch (error) {
+      if (error.response.status === 400) {
+        // Bad request
+        isError = true;
+        errorMsg = error.response.data[0].message;
+      }
       console.log(error);
     } finally {
       btnIndicator = "create NFT item";
     }
   }
 
+  // Execute each time isError is modified.
   $: {
     if (isError) {
       setTimeout(() => {
         isError = false;
+        fileErrMessage = "";
         errorMsg = "";
-      }, 4000);
+      }, 9000);
     }
   }
 </script>
@@ -61,7 +88,11 @@
   >
     <Label labelFor="upload" labelName="upload file" styles="h-[329px]">
       <section
-        class="h-full w-full border-2 border-dashed border-cr-grey-100 dark:border-cr-light rounded-lg"
+        class={`h-full w-full border-2 border-dashed ${
+          isError && fileErrMessage !== ""
+            ? "border-rose-500"
+            : "border-cr-grey-100 dark:border-cr-light"
+        } rounded-lg`}
       >
         <div class="flex flex-col items-center justify-center h-full">
           <p class="font-semibold text-xl text-center">
@@ -90,7 +121,25 @@
             <span class="font-regular">or</span> browse media on your device
           </p>
         </div>
-        <input type="file" name="upload" id="upload" hidden bind:files={file} />
+        <input
+          type="file"
+          name="upload"
+          id="upload"
+          required
+          on:invalid={(e) => {
+            isError = true;
+            fileErrMessage = e.target.validationMessage;
+          }}
+          hidden
+          bind:files={file}
+        />
+        {#if fileErrMessage !== "" && isError}
+          <span
+            class="text-xs font-medium float-right pt-4 inline-flex justify-end text-rose-500"
+          >
+            {fileErrMessage}
+          </span>
+        {/if}
       </section>
     </Label>
 
@@ -99,22 +148,66 @@
         type="text"
         name="name"
         id="name"
+        required
+        autocomplete="off"
+        on:invalid={(e) => {
+          isError = true;
+          nameErrMessage = e.target.validationMessage;
+        }}
         bind:value={name}
+        on:input={(e) => {
+          nameCount = e.target.value.length;
+        }}
         placeholder="item name"
         class="px-5 py-3 outline-none rounded-md bg-cr-light text-cr-black-100 dark:bg-cr-black-100 font-regular text-base dark:text-cr-light placeholder:capitalize placeholder:text-cr-grey-200 dark:placeholder:text-cr-light dark:placeholder:opacity-50 border-2 border-cr-grey-100 dark:border-none"
       />
+      {#if nameCount > 0 && !isError}
+        <span
+          class={`text-xs font-medium inline-flex justify-end ${
+            nameCount < 20 || nameCount > 30
+              ? "text-rose-500"
+              : "text-green-500"
+          }`}>{nameCount}</span
+        >
+      {:else if nameErrMessage !== "" && isError}
+        <span class="text-xs font-medium inline-flex justify-end text-rose-500"
+          >{nameErrMessage}</span
+        >
+      {/if}
     </Label>
 
     <Label labelFor="description" labelName="description">
       <textarea
+        required
         name="description"
+        autocomplete="off"
         bind:value={description}
+        on:invalid={(e) => {
+          isError = true;
+          descErrMessage = e.target.validationMessage;
+        }}
+        on:input={(e) => {
+          descCount = e.target.value.length;
+        }}
         id="description"
         placeholder="Description of your item"
         cols="30"
         rows="10"
         class="px-5 py-3 outline-none rounded-md bg-cr-light text-cr-black-100 dark:bg-cr-black-100 font-regular text-base dark:text-cr-light placeholder:capitalize placeholder:text-cr-grey-200 dark:placeholder:text-cr-light dark:placeholder:opacity-50 border-2 border-cr-grey-100 dark:border-none"
       />
+      {#if descCount > 0 && !isError}
+        <span
+          class={`text-xs font-medium inline-flex justify-end ${
+            descCount < 90 || descCount > 240
+              ? "text-rose-500"
+              : "text-green-500"
+          }`}>{descCount}</span
+        >
+      {:else if descErrMessage !== "" && isError}
+        <span class="text-xs font-medium inline-flex justify-end text-rose-500"
+          >{descErrMessage}</span
+        >
+      {/if}
     </Label>
 
     <Label labelFor="price" labelName="price">
@@ -122,8 +215,14 @@
         class="flex items-center justify-between px-5 dark:bg-cr-black-100 bg-cr-light rounded-md"
       >
         <input
-          type="text"
+          type="number"
           name="price"
+          autocapitalize="off"
+          required
+          on:invalid={(e) => {
+            isError = true;
+            priceErrMessage = e.target.validationMessage;
+          }}
           bind:value={price}
           id="price"
           placeholder="Enter price"
@@ -132,6 +231,7 @@
 
         <select
           bind:value={cryptoType}
+          required
           class="py-3 outline-none bg-cr-light text-cr-black-100 dark:bg-cr-black-100 font-regular text-base dark:text-cr-light placeholder:capitalize placeholder:text-cr-grey-200 dark:placeholder:text-cr-light dark:placeholder:opacity-50 border-2 border-cr-grey-100 dark:border-none font-medium uppercase"
         >
           <option value="eth">eth</option>
@@ -139,6 +239,11 @@
           <option value="mol">mol</option>
         </select>
       </div>
+      {#if priceErrMessage !== "" && isError}
+        <span class="text-xs font-medium inline-flex justify-end text-rose-500"
+          >{priceErrMessage}</span
+        >
+      {/if}
     </Label>
 
     <Button type="submit" handleClick={() => {}}>{btnIndicator}</Button>
