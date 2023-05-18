@@ -53,7 +53,7 @@
       /* Navigate to next page after delay */
       setTimeout(() => {
         navigate(from, { replace: true });
-      }, 1000);
+      }, 600);
     } catch (error) {
       buttonStateText = "login";
       showError = true;

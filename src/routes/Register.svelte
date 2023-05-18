@@ -27,7 +27,7 @@
         JSON.stringify({ username, password })
       );
 
-      if (response.status !== 200) throw new Error("Something happened");
+      // if (response.status !== 200) throw new Error("Something happened");
 
       const decodedUser = jwt_decode(response.data.accessToken);
       sessionStorage.setItem("user", JSON.stringify(decodedUser));
@@ -53,8 +53,9 @@
       /* Navigate to next page after delay */
       setTimeout(() => {
         navigate(from, { replace: true });
-      }, 1000);
+      }, 600);
     } catch (error) {
+      console.log(error);
       buttonStateText = "login";
       showError = true;
       errorData =
