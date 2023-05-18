@@ -9,6 +9,8 @@
   import { onMount } from "svelte";
   import API from "../utils/api";
 
+  let fetching = false;
+
   $: nfts = $userNfts;
 
   $: page = 1;
@@ -23,34 +25,36 @@
   }
 
   async function handleLoadMore() {
-    page += 1;
     try {
+      fetching = true;
       const response = await API.get(`/user/nft/${$user._id}`, {
         params: { page: page, size: size },
       });
-
-      !(response.status === 200) && console.log("Something went wrong");
-      page = response.data.page;
-      size = response.data.size && response.data.size;
-      userNfts.update((data) => (data = [data, ...response.data.nfts]));
+      console.log(response);
+      userNfts.update((data) => [...data, ...response.data]);
+      page += response.data.page;
     } catch (error) {
       console.log(error);
+    } finally {
+      fetching = false;
     }
   }
 
   onMount(async () => {
     if ($userNfts.length > 0) return;
     try {
+      fetching = true;
       const response = await API.get(`/user/nft/${$user._id}`, {
         params: { page: page, size: size },
       });
 
       !(response.status === 200) && console.log("Something went wrong");
-      page = response.data.page;
-      size = response.data.size && response.data.size;
-      userNfts.update((data) => (data = response.data));
+      userNfts.update((data) => (data = response.data?.data));
+      page += response.data.page;
     } catch (error) {
       console.log(error);
+    } finally {
+      fetching = false;
     }
   });
 </script>
@@ -84,22 +88,27 @@
     <section
       class="grid place-items-center grid-cols-2 sm:grid-cols-4 gap-[10px] md:grid-cols-3 lg:grid-cols-4"
     >
-      {#each nfts as nft}
-        <NftCard
-          artId={nft._id}
-          artLikes={genRandomNumber()}
-          artName={nft.name}
-          artPrice={parseInt(nft.price)}
-          artUri={nft.nftImage.secure_url}
-        />
-      {/each}
+      {#if !(nfts.length > 0)}
+        <span>no nfts</span>
+      {:else}
+        {#each nfts as nft}
+          <NftCard
+            artId={nft._id}
+            artLikes={genRandomNumber()}
+            artName={nft.name}
+            artPrice={parseInt(nft.price)}
+            artUri={nft.nftImage.secure_url}
+          />
+        {/each}
+      {/if}
     </section>
 
     <div class="flex place-content-center mt-7 pb-5 px-2">
       <Button
         styles="w-full max-w-xs"
         outline={true}
-        handleClick={() => handleLoadMore}>load more</Button
+        handleClick={() => handleLoadMore()}
+        >{fetching ? "Loading NFTs..." : "load more"}</Button
       >
     </div>
   </section>
