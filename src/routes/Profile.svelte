@@ -76,7 +76,7 @@
 <section>
   <section class="h-[367px] md:h-[518px] relative z-0">
     <img
-      src={dummyImg}
+      src="https://source.unsplash.com/640x450/?art,floral,nft"
       alt="profile background"
       class="absolute top-0 left-0 -z-10 h-[65%] md:h-[80%] w-full object-cover object-center"
     />
