@@ -31,13 +31,13 @@
   <section>
     <h3 class="text-center font-semibold my-3">Share</h3>
     <div class="flex items-center justify-center gap-4">
-      <a href="#">
+      <a href="https://twitter.com/trickthevick" target="_blank">
         <Icon icon="mdi:twitter" width={32} height={32} />
       </a>
-      <a href="#">
+      <a href="https://twitter.com/trickthevick" target="_blank">
         <Icon icon="mdi:instagram" width={32} height={32} />
       </a>
-      <a href="#">
+      <a href="https://twitter.com/trickthevick" target="_blank">
         <Icon icon="mdi:mastodon" width={32} height={32} />
       </a>
     </div>
