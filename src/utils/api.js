@@ -1,4 +1,5 @@
 import axios from "axios";
+import { user } from "./store";
 
 let refToken = JSON.parse(sessionStorage.getItem("refreshToken"));
 
@@ -36,7 +37,9 @@ API.interceptors.response.use(
       }
     }
     shouldRefresh = false; // Ends request after first execution
-    // originalReq._retry = false;
+    /* Remove user details */
+    sessionStorage.removeItem("user");
+    user.set(null);
     return Promise.reject(error);
   }
 );
