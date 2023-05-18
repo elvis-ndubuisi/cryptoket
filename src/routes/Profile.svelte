@@ -103,7 +103,7 @@
     <section
       class="grid place-items-center grid-cols-2 sm:grid-cols-4 gap-[10px] md:grid-cols-3 lg:grid-cols-4"
     >
-      {#if nfts.length < 1}
+      {#if $userNfts.length < 1}
         <section
           class="col-span-2 sm:col-span-4 md:col-span-3 lg:col-span-4 flex flex-col gap-8"
         >
