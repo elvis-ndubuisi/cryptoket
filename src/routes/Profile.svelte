@@ -4,7 +4,7 @@
   import Button from "../lib/Button.svelte";
   import SearchBar from "../lib/SearchBar.svelte";
   import NftCard from "../lib/NFTCard.svelte";
-  import { userNfts, user } from "../utils/store";
+  import { userNfts, user, query } from "../utils/store";
   import { genRandomNumber } from "../utils/mod";
   import { useNavigate } from "svelte-navigator";
 
@@ -35,14 +35,14 @@
     try {
       fetching = true;
       const response = await API.get(`/user/nft/${$user._id}`, {
-        params: { page: page, size: size },
+        params: { page: $query.pQuery, size: size },
       });
       if (response.data?.data.length < 1) {
         canFetchMore = false;
         return;
       }
       userNfts.update((data) => [...data, ...response.data?.data]);
-      page += response.data.page;
+      $query.pQuery += response.data.page;
     } catch (error) {
       console.log(error);
     } finally {
@@ -55,13 +55,13 @@
     try {
       fetching = true;
       const response = await API.get(`/user/nft/${$user._id}`, {
-        params: { page: page, size: size },
+        params: { page: $query.pQuery, size: size },
         signal: controller.signal,
       });
 
       !(response.status === 200) && console.log("Something went wrong");
       userNfts.update((data) => (data = response.data?.data));
-      page += response.data.page;
+      $query.pQuery += response.data.page;
     } catch (error) {
       console.log(error);
     } finally {

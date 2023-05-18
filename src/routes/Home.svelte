@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from "svelte";
   import Icon from "@iconify/svelte";
   import API from "../utils/api";
-  import { topBids } from "../utils/store";
+  import { topBids, query } from "../utils/store";
   import TopSellerCard from "../lib/TopSellerCard.svelte";
   import NftCard from "../lib/NFTCard.svelte";
   import Button from "../lib/Button.svelte";
@@ -18,10 +18,7 @@
     nftImage: { secure_url: string };
   }[];
 
-  /* Pagination variables */
-  $: page = 1;
-  $: size = 6;
-
+  let size = 6;
   /* Fetching states */
   let fetching = false;
   let canFetchMore = true;
@@ -33,7 +30,7 @@
       fetching = true;
       const response = await API.get("/nft", {
         params: {
-          page: page,
+          page: $query.hQuery,
           size: size,
         },
       });
@@ -42,7 +39,7 @@
         return;
       }
       topBids.update((data) => [...data, ...response.data?.data]);
-      page += response.data.page;
+      $query.hQuery += response.data.page;
     } catch (error) {
       console.log(error);
     } finally {
@@ -57,10 +54,9 @@
     try {
       const response = await API.get("/nft", {
         signal: controller.signal,
-        params: { page: page, size: size },
+        params: { page: $query.hQuery, size: size },
       });
-      page += response.data.page;
-      // size = response?.data?.size;
+      $query.hQuery += response.data.page;
       topBids.set(response.data.data);
     } catch (error) {
       console.log(error);

@@ -13,3 +13,8 @@ export const refreshToken = writable(
 export const topBids = writable([]);
 
 export const userNfts = writable([]);
+
+export const query = writable({
+  hQuery: sessionStorage.hQuery ? sessionStorage.get("hQuery") : 1,
+  pQuery: sessionStorage.pQuery ? sessionStorage.getItem("pQuery") : 1,
+});
