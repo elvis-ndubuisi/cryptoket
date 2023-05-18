@@ -29,7 +29,6 @@
       const response = await API.get(`/nft/id/${params.itemId}`);
       const { nft } = response.data;
       data = nft;
-      console.log(data.author.username);
     } catch (error) {
       console.log(error);
       return null;

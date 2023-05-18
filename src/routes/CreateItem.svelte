@@ -11,12 +11,17 @@
 
   const navigate = useNavigate();
 
+  let forTest = $topBids;
+
   let file, name, description, price, cryptoType;
   let nameCount = 0,
     descCount = 0;
   let btnIndicator = "create NFT item";
   let errorMsg = "";
   $: isError = false;
+
+  // Refs
+  let fileInput;
 
   // Error messages
   let fileErrMessage = "";
@@ -41,18 +46,36 @@
     try {
       btnIndicator = "Submitting...";
       const response = await API.postForm("/nft/create", form);
-      console.log(response.data);
-      // Add data to stores.
+      // Update data to stores.
       topBids.update((data) => {
-        [...data, response.data];
+        data.unshift({
+          _id: response.data?.data?._id,
+          cryptoType: response.data?.data?.cryptoType,
+          name: response.data?.data?.name,
+          price: response.data?.data?.price,
+          nftImage: response.data?.data?.nftImage,
+        });
+        return data;
       });
-      // userNfts.update();
+      userNfts.update((data) => {
+        data.unshift({
+          _id: response.data?.data?._id,
+          cryptoType: response.data?.data?.cryptoType,
+          name: response.data?.data?.name,
+          price: response.data?.data?.price,
+          nftImage: response.data?.data?.nftImage,
+        });
+        return data;
+      });
       navigate("/profile");
     } catch (error) {
       if (error.response.status === 400) {
         // Bad request
         isError = true;
         errorMsg = error.response.data[0].message;
+      }
+      if(error.response.status === 401 && error.response.data === "Could not refresh token"){
+        // navigate('/login')
       }
       console.log(error);
     } finally {
@@ -126,11 +149,18 @@
           name="upload"
           id="upload"
           required
+          hidden
+          on:input={(e) => {
+            if (e.target.files[0].name) {
+              e.target.parentElement.classList.add("opacity-50");
+            } else {
+              e.target.parentElement.classList.remove("opacity-50");
+            }
+          }}
           on:invalid={(e) => {
             isError = true;
             fileErrMessage = e.target.validationMessage;
           }}
-          hidden
           bind:files={file}
         />
         {#if fileErrMessage !== "" && isError}
