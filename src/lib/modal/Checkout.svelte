@@ -2,6 +2,8 @@
   import Button from "../Button.svelte";
 
   export let cancel: () => void;
+  export let checkout: () => void;
+
   export let data: {
     name: string;
     uri: string;
@@ -51,7 +53,7 @@
   </div>
   <hr class="border border-cr-grey-300 my-6 md:my-[30px]" />
   <div class="flex items-center justify-center gap-3 px-4">
-    <Button styles="md:py-3" handleClick={() => {}}>check out</Button>
+    <Button styles="md:py-3" handleClick={checkout}>check out</Button>
     <Button styles="md:py-3" handleClick={cancel}>cancel</Button>
   </div>
 </section>

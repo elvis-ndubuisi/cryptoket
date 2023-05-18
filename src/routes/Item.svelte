@@ -1,13 +1,18 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
   import Button from "../lib/Button.svelte";
   import Modal from "../lib/modal/Modal.svelte";
   import Checkout from "../lib/modal/Checkout.svelte";
+  import Payment from "../lib/modal/Payment.svelte";
   import Icon from "@iconify/svelte";
   import tabBar from "../data/itemScreenTab";
   import API from "../utils/api";
 
+  export let params;
+
   let showModal = false;
+  let checkout = false;
+  let checkoutTimer;
   let activeTab = tabBar[0].id;
   const tabContents = [
     "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
@@ -15,13 +20,21 @@
     "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   ];
 
+  // Fetching states + data
   let isFetching = false;
   let isError = false;
   let data = {};
 
-  export let params;
-
   import dummyImg from "../assets/shirt-viz-screenshot.png";
+
+  $: {
+    if (checkout) {
+      checkoutTimer = setTimeout(() => {
+        checkout = false;
+        showModal = false;
+      }, 3500);
+    }
+  }
 
   onMount(async () => {
     isFetching = true;
@@ -36,6 +49,8 @@
       isFetching = false;
     }
   });
+
+  onDestroy(() => clearTimeout(checkoutTimer));
 </script>
 
 {#if isFetching}
@@ -119,7 +134,7 @@
       </section>
       <section class="max-w-md">
         {#if activeTab === 0}
-          <p>{data?.description}}</p>
+          <p>{data?.description}</p>
           <p>{tabContents[0]}</p>
         {:else if activeTab === 1}
           <p>{tabContents[1]}</p>
@@ -140,14 +155,24 @@
 {/if}
 
 <Modal isOpen={showModal}>
-  <Checkout
-    cancel={() => (showModal = false)}
-    data={{
-      uri: data?.nftImage?.secure_url,
-      name: data?.name,
-      price: data?.price,
-      type: data?.cryptoType,
-      authorName: "fix this",
-    }}
-  />
+  {#if !checkout && showModal}
+    <Checkout
+      checkout={() => (checkout = true)}
+      cancel={() => (showModal = false)}
+      data={{
+        uri: data?.nftImage?.secure_url,
+        name: data?.name,
+        price: data?.price,
+        type: data?.cryptoType,
+        authorName: data?.author?.username,
+      }}
+    />
+  {/if}
+  {#if checkout && showModal}
+    <Payment
+      nftName={data?.name}
+      nftImage={data?.nftImage?.secure_url}
+      nftCreator={data?.author?.username}
+    />
+  {/if}
 </Modal>
