@@ -23,8 +23,8 @@
   }[];
 
   /* Pagination variables */
-  let page = 1;
-  let size = 4;
+  $: page = 1;
+  $: size = 6;
 
   /* Fetching states */
   let fetching = false;
@@ -33,11 +33,18 @@
   const sub = topBids.subscribe((data) => (topBidsData = data));
 
   async function handleFetchMore() {
-    page += 1;
     try {
       fetching = true;
-      const response = await API.get(`/nft?page=${page}`);
+      const response = await API.get("/nft", {
+        params: {
+          page: page,
+          size: size,
+        },
+      });
+      topBids.update((data) => [...data, ...response.data?.data]);
+      page += response.data.page;
     } catch (error) {
+      console.log(error);
     } finally {
       fetching = false;
     }
@@ -48,15 +55,15 @@
       return;
     }
     try {
-      const response = await API.get(`/nft?page=${page}`, {
+      const response = await API.get("/nft", {
         signal: controller.signal,
+        params: { page: page, size: size },
       });
-      page = response.data.page;
-      size = response?.data?.size;
+      page += response.data.page;
+      // size = response?.data?.size;
       topBids.set(response.data.data);
     } catch (error) {
-      // error?.response.status === 403 && navigate("/login", { replace: false });
-      // console.log(error);
+      console.log(error);
     }
   });
 
