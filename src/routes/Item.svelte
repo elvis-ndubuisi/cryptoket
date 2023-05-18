@@ -1,6 +1,5 @@
 <script>
-  import { onMount, onDestroy } from "svelte";
-  import { navigate } from "svelte-navigator";
+  import { onMount } from "svelte";
   import Button from "../lib/Button.svelte";
   import Modal from "../lib/modal/Modal.svelte";
   import Checkout from "../lib/modal/Checkout.svelte";
