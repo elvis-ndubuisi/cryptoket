@@ -2,18 +2,14 @@
   import { onMount, onDestroy } from "svelte";
   import Icon from "@iconify/svelte";
   import API from "../utils/api";
-  import { refreshToken, topBids } from "../utils/store";
+  import { topBids } from "../utils/store";
   import TopSellerCard from "../lib/TopSellerCard.svelte";
   import NftCard from "../lib/NFTCard.svelte";
   import Button from "../lib/Button.svelte";
   import { genRandomNumber } from "../utils/mod";
-  import { nftMock, topSeller } from "../data/mockData";
-
-  import { useLocation, useNavigate } from "svelte-navigator";
+  import { topSeller } from "../data/mockData";
 
   const controller = new AbortController();
-  const location = useLocation();
-  const navigate = useNavigate();
 
   let topBidsData: {
     _id: string;
@@ -28,7 +24,7 @@
 
   /* Fetching states */
   let fetching = false;
-  const fetchText = "Loading Nfts.....";
+  let canFetchMore = true;
 
   const sub = topBids.subscribe((data) => (topBidsData = data));
 
@@ -41,6 +37,10 @@
           size: size,
         },
       });
+      if (response.data?.data < 1) {
+        canFetchMore = false;
+        return;
+      }
       topBids.update((data) => [...data, ...response.data?.data]);
       page += response.data.page;
     } catch (error) {
@@ -144,12 +144,16 @@
     </section>
   </section>
 
-  <div class="flex place-content-center py-4 px-2">
-    <Button
-      styles="w-full max-w-xs"
-      outline={true}
-      handleClick={(e) => handleFetchMore()}
-      >{fetching ? fetchText : "load more"}</Button
-    >
-  </div>
+  {#if canFetchMore}
+    <div class="flex place-content-center py-4 px-2">
+      <Button
+        styles="w-full max-w-xs"
+        outline={true}
+        handleClick={(e) => handleFetchMore()}
+        >{fetching ? "Loading Nfts....." : "load more"}</Button
+      >
+    </div>
+  {:else}
+    <div class="py-12" />
+  {/if}
 </section>
