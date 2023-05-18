@@ -20,7 +20,6 @@
   $: nfts = $userNfts;
 
   // Pagination variables
-  $: page = 1;
   $: size = 6;
 
   function searchNfts(e) {
