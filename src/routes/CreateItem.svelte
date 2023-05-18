@@ -10,20 +10,16 @@
   function handleDropZone() {}
 
   const navigate = useNavigate();
-
-  let forTest = $topBids;
+  const controller = new AbortController();
 
   let file, name, description, price, cryptoType;
   let nameCount = 0,
     descCount = 0;
   let btnIndicator = "create NFT item";
-  let errorMsg = "";
+
+  // Error messages + states
   $: isError = false;
-
-  // Refs
-  let fileInput;
-
-  // Error messages
+  let errorMessage = "";
   let fileErrMessage = "";
   let nameErrMessage = "";
   let descErrMessage = "";
@@ -32,7 +28,7 @@
   async function handleSubmit() {
     if (!file) {
       isError = true;
-      errorMsg = "No file selected";
+      errorMessage = "No file selected";
       return;
     }
 
@@ -45,51 +41,55 @@
 
     try {
       btnIndicator = "Submitting...";
-      const response = await API.postForm("/nft/create", form);
+      const response = await API.postForm("/nft/create", form, {
+        signal: controller.signal,
+      });
       // Update data to stores.
-      topBids.update((data) => {
-        data.unshift({
+      userNfts.update((data) => [
+        ...data,
+        {
           _id: response.data?.data?._id,
           cryptoType: response.data?.data?.cryptoType,
           name: response.data?.data?.name,
           price: response.data?.data?.price,
           nftImage: response.data?.data?.nftImage,
-        });
-        return data;
-      });
-      userNfts.update((data) => {
-        data.unshift({
-          _id: response.data?.data?._id,
-          cryptoType: response.data?.data?.cryptoType,
-          name: response.data?.data?.name,
-          price: response.data?.data?.price,
-          nftImage: response.data?.data?.nftImage,
-        });
-        return data;
-      });
+        },
+      ]);
       navigate("/profile");
     } catch (error) {
-      if (error.response.status === 400) {
-        // Bad request
+      if (error.response.status === 400 && error.response.data.length > 0) {
+        if (isError) return;
+
         isError = true;
-        errorMsg = error.response.data[0].message;
+        error.response.data.forEach((err, idx) => {
+          if (err?.path[1] === "description") {
+            descErrMessage = err.message;
+          }
+          if (err?.path[1] === "name") {
+            nameErrMessage = err.message;
+          }
+        });
+        return;
       }
-      if(error.response.status === 401 && error.response.data === "Could not refresh token"){
-        // navigate('/login')
+      if (error.response.status === 409) {
+        isError = true;
+        errorMessage = error.response.data;
+        fileErrMessage = error.response.data;
+        return;
       }
-      console.log(error);
     } finally {
       btnIndicator = "create NFT item";
     }
+    controller.abort();
   }
 
-  // Execute each time isError is modified.
+  // Executes each time isError is modified.
   $: {
     if (isError) {
       setTimeout(() => {
         isError = false;
         fileErrMessage = "";
-        errorMsg = "";
+        errorMessage = "";
       }, 9000);
     }
   }
@@ -101,7 +101,7 @@
   </h1>
 
   {#if isError}
-    <p class="text-rose-500 text-center">{errorMsg}</p>
+    <p class="text-rose-500 text-center">{errorMessage}</p>
   {/if}
 
   <form
@@ -148,7 +148,7 @@
           type="file"
           name="upload"
           id="upload"
-          required
+          accept="image/*"
           hidden
           on:input={(e) => {
             if (e.target.files[0].name) {
