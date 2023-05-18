@@ -99,7 +99,7 @@
         <TopSellerCard
           sellerName={seller.sellerName}
           sellerPrice={seller.sellerPrice}
-          sellerProfile={seller.sellerPrice}
+          sellerProfile={seller.sellerProfile}
           sellerRank={seller.sellerRank}
         />
       {/each}
