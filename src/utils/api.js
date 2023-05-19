@@ -16,30 +16,33 @@ let shouldRefresh = false;
 API.interceptors.response.use(
   (res) => res,
   async (error) => {
-    // const originalReq = error.config;
     if (
       (error.response.status === 403 || error.response.status === 401) &&
       !shouldRefresh
-      // !originalReq._retry
     ) {
       shouldRefresh = true; // start request;
-      // originalReq._retry = true;
-      const refResponse = await API.post("/user/auth/refresh", {
-        refreshToken: refToken,
-      });
+      try {
+        const refResponse = await API.post("/user/auth/refresh", {
+          refreshToken: refToken,
+        });
 
-      if (refResponse.status === 200) {
-        API.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${refResponse.data.accessToken}`;
+        if (refResponse.status === 200) {
+          API.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${refResponse.data.accessToken}`;
 
-        return API(error.config);
+          return API(error.config);
+        }
+      } catch (error) {
+        console.log("refresh token failed");
+        sessionStorage.removeItem("user");
+        sessionStorage.removeItem("refreshToken");
+        user.set(null);
+        return Promise.reject(error);
       }
     }
     shouldRefresh = false; // Ends request after first execution
-    /* Remove user details */
-    sessionStorage.removeItem("user");
-    user.set(null);
+
     return Promise.reject(error);
   }
 );
