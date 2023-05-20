@@ -37,7 +37,7 @@
 
     <Route path="login" component={Login} />
     <Route path="register" component={Register} />
-    <!-- <Route path="*" component={NotFound} /> -->
+    <Route path="/*" component={NotFound} />
   </main>
   <Footer />
 </Router>
