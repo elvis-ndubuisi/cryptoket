@@ -18,7 +18,7 @@
     class="bg-cr-grey-100 rounded-xl h-[143.94px] md:h-[230px] object-cover object-center"
   />
   <p
-    class="font-semibold text-xs my-2 capitalize text-cr-black-100 dark:text-cr-light"
+    class="line-clamp-1 font-semibold text-xs my-2 capitalize text-cr-black-100 dark:text-cr-light"
   >
     {artName}
   </p>

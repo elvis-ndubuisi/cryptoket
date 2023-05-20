@@ -31,7 +31,9 @@
     </span>
   </div>
 
-  <p class="font-semibold text-sm capitalize text-center my-[3px] md:my-[5px]">
+  <p
+    class="line-clamp-1 font-semibold text-sm capitalize text-center my-[3px] md:my-[5px]"
+  >
     {sellerName}
   </p>
   <p class="text-sm font-regular text-center uppercase">

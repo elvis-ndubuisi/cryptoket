@@ -19,14 +19,6 @@
   <main
     class="min-h-full bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light"
   >
-    <Route path="login">
-      <Login />
-    </Route>
-
-    <Route path="register">
-      <Register />
-    </Route>
-
     <PrivateRoute path="/">
       <Home />
     </PrivateRoute>
@@ -40,20 +32,17 @@
       <Route path="/:itemId" component={Item} {params} />
     </PrivateRoute>
 
-    <Route component={NotFound} />
-    <!-- <PrivateRoute path="item/create">
-      <CreateItem />
-    </PrivateRoute>
+    <Route path="login">
+      <Login />
+    </Route>
 
-    <PrivateRoute path="item/:itemId" let:params>
-      <Item {params} />
-    </PrivateRoute> -->
+    <Route path="register">
+      <Register />
+    </Route>
 
-    <!-- <Route path="login" component={Login} /> -->
-    <!-- <Route path="register" component={Register} /> -->
+    <Route path="*" component={NotFound} />
   </main>
   <Footer />
-  <Route />
 </Router>
 
 <style lang="postcss">
