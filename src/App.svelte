@@ -23,20 +23,20 @@
       <Home />
     </PrivateRoute>
 
-    <PrivateRoute path="/profile" let:location let:params>
+    <PrivateRoute path="profile" let:location let:params>
       <Profile />
     </PrivateRoute>
 
-    <PrivateRoute path="/item/create" let:location let:params>
+    <PrivateRoute path="item/create" let:location let:params>
       <CreateItem />
     </PrivateRoute>
 
-    <PrivateRoute path="/item/:itemId" let:location let:params>
+    <PrivateRoute path="item/:itemId" let:location let:params>
       <Item {params} />
     </PrivateRoute>
 
-    <Route path="/login" component={Login} />
-    <Route path="/register" component={Register} />
+    <Route path="login" component={Login} />
+    <Route path="register" component={Register} />
     <Route path="*" component={NotFound} />
   </main>
   <Footer />
