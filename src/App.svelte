@@ -14,7 +14,7 @@
   import PrivateRoute from "./routes/PrivateRoute.svelte";
 </script>
 
-<Router basepath="/" primary={false}>
+<Router primary={false}>
   <Header />
   <main
     class="min-h-full bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light"
@@ -37,7 +37,7 @@
 
     <Route path="login" component={Login} />
     <Route path="register" component={Register} />
-    <Route path="*" component={NotFound} />
+    <!-- <Route path="*" component={NotFound} /> -->
   </main>
   <Footer />
 </Router>
