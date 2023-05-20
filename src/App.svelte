@@ -19,6 +19,14 @@
   <main
     class="min-h-full bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light"
   >
+    <Route path="login">
+      <Login />
+    </Route>
+
+    <Route path="register">
+      <Register />
+    </Route>
+
     <PrivateRoute path="/">
       <Home />
     </PrivateRoute>
@@ -31,14 +39,6 @@
       <Route path="create" component={CreateItem} />
       <Route path="/:itemId" component={Item} {params} />
     </PrivateRoute>
-
-    <Route path="login">
-      <Login />
-    </Route>
-
-    <Route path="register">
-      <Register />
-    </Route>
 
     <Route component={NotFound} />
     <!-- <PrivateRoute path="item/create">
