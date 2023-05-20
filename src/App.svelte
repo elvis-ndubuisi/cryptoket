@@ -29,7 +29,7 @@
 
     <PrivateRoute path="item/*" let:params>
       <Route path="create" component={CreateItem} />
-      <Route path="/:itemId" component={Item} {params} />
+      <Route path=":itemId" component={Item} {params} />
     </PrivateRoute>
 
     <Route path="login">
