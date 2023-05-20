@@ -3,7 +3,8 @@ import { user } from "./store";
 
 let refToken = JSON.parse(sessionStorage.getItem("refreshToken"));
 
-const baseURL = "http://localhost:8080/cryptoket";
+// const baseURL = "http://localhost:8080/cryptoket";
+const baseURL = "https://genesis-service.onrender.com/cryptoket";
 
 const API = axios.create({
   baseURL: baseURL,
