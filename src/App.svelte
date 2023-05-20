@@ -14,7 +14,7 @@
   import PrivateRoute from "./routes/PrivateRoute.svelte";
 </script>
 
-<Router primary={false}>
+<Router basepath="/" primary={false}>
   <Header />
   <main
     class="min-h-full bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light"
