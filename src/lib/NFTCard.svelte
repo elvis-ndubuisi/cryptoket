@@ -15,7 +15,7 @@
   <img
     src={artUri}
     alt={artName}
-    class="bg-cr-grey-100 rounded-xl h-[143.94px] md:h-[230px] object-cover object-center"
+    class="bg-cr-grey-100 rounded-xl h-[143.94px] md:h-[230px] w-full object-cover object-center"
   />
   <p
     class="line-clamp-1 font-semibold text-xs my-2 capitalize text-cr-black-100 dark:text-cr-light"

@@ -1,4 +1,5 @@
 <script>
+  import { onDestroy } from "svelte";
   import jwt_decode from "jwt-decode";
   import { useLocation, useNavigate } from "svelte-navigator";
   import { user, refreshToken } from "../utils/store";
@@ -65,10 +66,12 @@
           : typeof error?.response.data === typeof ""
           ? error?.response.data
           : error?.response.data[0].message;
-    } finally {
-      controller.abort();
     }
   }
+
+  onDestroy(() => {
+    controller.abort();
+  });
 </script>
 
 <section
