@@ -9,6 +9,7 @@
 
   let navigate = useNavigate();
   let location = useLocation();
+  let controller = new AbortController();
 
   let buttonStateText = "login";
   let username = "";
@@ -24,7 +25,8 @@
 
       const response = await API.post(
         "/user/auth/login",
-        JSON.stringify({ username, password })
+        JSON.stringify({ username, password }),
+        { signal: controller.signal }
       );
 
       if (response.status !== 200) throw new Error("Something happened");
@@ -63,6 +65,8 @@
           : typeof error?.response.data === typeof ""
           ? error?.response.data
           : error?.response.data[0].message;
+    } finally {
+      controller.abort();
     }
   }
 </script>

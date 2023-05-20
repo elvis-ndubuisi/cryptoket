@@ -19,27 +19,41 @@
   <main
     class="min-h-full bg-cr-light text-cr-black-200 dark:bg-cr-dark dark:text-cr-light"
   >
-    <PrivateRoute path="/" let:location let:params>
+    <PrivateRoute path="/">
       <Home />
     </PrivateRoute>
 
-    <PrivateRoute path="profile" let:location let:params>
+    <PrivateRoute path="profile">
       <Profile />
     </PrivateRoute>
 
-    <PrivateRoute path="item/create" let:location let:params>
+    <PrivateRoute path="items/*" let:params>
+      <Route path="create" component={CreateItem} />
+      <Route path="/:itemId" component={Item} {params} />
+    </PrivateRoute>
+
+    <Route path="login">
+      <Login />
+    </Route>
+
+    <Route path="register">
+      <Register />
+    </Route>
+
+    <Route component={NotFound} />
+    <!-- <PrivateRoute path="item/create">
       <CreateItem />
     </PrivateRoute>
 
-    <PrivateRoute path="item/:itemId" let:location let:params>
+    <PrivateRoute path="item/:itemId" let:params>
       <Item {params} />
-    </PrivateRoute>
+    </PrivateRoute> -->
 
-    <Route path="login" component={Login} />
-    <Route path="register" component={Register} />
-    <Route path="/*" component={NotFound} />
+    <!-- <Route path="login" component={Login} /> -->
+    <!-- <Route path="register" component={Register} /> -->
   </main>
   <Footer />
+  <Route />
 </Router>
 
 <style lang="postcss">
