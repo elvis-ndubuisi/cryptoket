@@ -104,6 +104,13 @@
       >{buttonStateText}</Button
     >
 
+    <Button
+      type="button"
+      outline={true}
+      handleClick={() => navigate("/register")}
+      styles="py-3">Join CryptoKet</Button
+    >
+
     {#if showError}
       <section>
         <p class="text-rose-500 lowercase">{errorData}</p>

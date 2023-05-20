@@ -104,36 +104,17 @@
     <Button type="submit" handleClick={() => {}} styles="py-3"
       >{buttonStateText}</Button
     >
+    <Button
+      outline={true}
+      type="button"
+      handleClick={() => navigate("/login")}
+      styles="py-3">Login</Button
+    >
 
     {#if showError}
       <section>
         <p class="text-rose-500 lowercase">{errorData}</p>
       </section>
     {/if}
-
-    <footer class="bg-cr-grey-100 dark:bg-cr-black-100 p-4 rounded-lg">
-      <h3 class="text-center font-semibold text-lg capitalize">User 1</h3>
-      <div>
-        <div class="flex items-center justify-between">
-          <p class="font-regular text-sm capitalize font-medium">username</p>
-          <p class="font-regular text-sm font-medium">username</p>
-        </div>
-        <div class="flex items-center justify-between">
-          <p class="font-regular text-sm font-medium capitalize">password</p>
-          <p class="font-regular text-sm font-medium">password</p>
-        </div>
-      </div>
-      <h3 class="text-center font-semibold text-lg capitalize mt-3">user 2</h3>
-      <div>
-        <div class="flex items-center justify-between">
-          <p class="font-regular text-sm capitalize font-medium">username</p>
-          <p class="font-regular text-sm font-medium">username</p>
-        </div>
-        <div class="flex items-center justify-between">
-          <p class="font-regular text-sm capitalize font-medium">password</p>
-          <p class="font-regular text-sm font-medium">password</p>
-        </div>
-      </div>
-    </footer>
   </form>
 </section>
