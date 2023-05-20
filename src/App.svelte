@@ -27,9 +27,12 @@
       <Profile />
     </PrivateRoute>
 
-    <PrivateRoute path="item/*" let:params>
-      <Route path="create" component={CreateItem} />
-      <Route path=":itemId" component={Item} {params} />
+    <PrivateRoute path="item/create" let:params>
+      <CreateItem />
+    </PrivateRoute>
+
+    <PrivateRoute path="item/:itemId" let:params>
+      <Item {params} />
     </PrivateRoute>
 
     <Route path="login">
