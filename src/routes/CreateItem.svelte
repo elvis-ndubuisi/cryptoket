@@ -1,10 +1,11 @@
 <script>
   // @ts-nocheck
 
+  import { onDestroy } from "svelte";
   import Button from "../lib/Button.svelte";
   import Label from "../lib/Label.svelte";
   import API from "../utils/api";
-  import { topBids, userNfts } from "../utils/store";
+  import { userNfts } from "../utils/store";
   import { useNavigate } from "svelte-navigator";
 
   const navigate = useNavigate();
@@ -78,7 +79,6 @@
     } finally {
       btnIndicator = "create NFT item";
     }
-    controller.abort();
   }
 
   function handleFileDrop(event) {
@@ -95,6 +95,10 @@
       }, 9000);
     }
   }
+
+  onDestroy(() => {
+    controller.abort();
+  });
 </script>
 
 <section class="w-full max-w-[610px] mx-auto flex flex-col py-6 px-2">
@@ -204,7 +208,7 @@
       {#if nameCount > 0 && !isError}
         <span
           class={`text-xs font-medium inline-flex justify-end ${
-            nameCount < 20 || nameCount > 30
+            nameCount < 20 || nameCount > 50
               ? "text-rose-500"
               : "text-green-500"
           }`}>{nameCount}</span

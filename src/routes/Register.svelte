@@ -1,4 +1,5 @@
 <script>
+  import { onDestroy } from "svelte";
   import jwt_decode from "jwt-decode";
   import { useLocation, useNavigate } from "svelte-navigator";
   import { user, refreshToken } from "../utils/store";
@@ -9,6 +10,7 @@
 
   let navigate = useNavigate();
   let location = useLocation();
+  const controller = new AbortController();
 
   let buttonStateText = "register";
   let username = "";
@@ -17,17 +19,16 @@
   let showError = false;
   let errorData;
 
-  async function handleLogin() {
+  async function handleRegistration() {
     try {
       buttonStateText = "validating...";
       if (!username || !password) throw new Error("invalid inputs");
 
       const response = await API.post(
         "/user/auth/join",
-        JSON.stringify({ username, password })
+        JSON.stringify({ username, password }),
+        { signal: controller.signal }
       );
-
-      // if (response.status !== 200) throw new Error("Something happened");
 
       const decodedUser = jwt_decode(response.data.accessToken);
       sessionStorage.setItem("user", JSON.stringify(decodedUser));
@@ -55,17 +56,22 @@
         navigate(from, { replace: true });
       }, 600);
     } catch (error) {
-      console.log(error);
-      buttonStateText = "login";
       showError = true;
-      errorData =
-        error.response === undefined
-          ? error?.message
-          : typeof error.response.data === typeof ""
-          ? error.response.data
-          : error.response.data[0].message;
+      if (error.response.status === 409) {
+        errorData = error.response.data;
+      }
+      if (error.response.status === 400 && error.response.data.length > 0) {
+        errorData = error.response.data[0].message;
+      }
+      errorData = error.response.data;
+    } finally {
+      buttonStateText = "Register";
     }
   }
+
+  onDestroy(() => {
+    controller.abort();
+  });
 </script>
 
 <section
@@ -79,7 +85,7 @@
 
   <form
     class="flex flex-col gap-5 w-full"
-    on:submit|preventDefault|stopPropagation={handleLogin}
+    on:submit|preventDefault={handleRegistration}
   >
     <Label labelFor="username" labelName="username">
       <input
