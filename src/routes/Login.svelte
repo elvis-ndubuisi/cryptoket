@@ -131,22 +131,22 @@
       <div>
         <div class="flex items-center justify-between">
           <p class="font-regular text-sm capitalize font-medium">username</p>
-          <p class="font-regular text-sm font-medium">username</p>
+          <p class="font-regular text-sm font-medium">victony nft</p>
         </div>
         <div class="flex items-center justify-between">
           <p class="font-regular text-sm font-medium capitalize">password</p>
-          <p class="font-regular text-sm font-medium">password</p>
+          <p class="font-regular text-sm font-medium">@vickybatch</p>
         </div>
       </div>
       <h3 class="text-center font-semibold text-lg capitalize mt-3">user 2</h3>
       <div>
         <div class="flex items-center justify-between">
           <p class="font-regular text-sm capitalize font-medium">username</p>
-          <p class="font-regular text-sm font-medium">username</p>
+          <p class="font-regular text-sm font-medium">rema kuti</p>
         </div>
         <div class="flex items-center justify-between">
           <p class="font-regular text-sm capitalize font-medium">password</p>
-          <p class="font-regular text-sm font-medium">password</p>
+          <p class="font-regular text-sm font-medium">43basement</p>
         </div>
       </div>
     </footer>
