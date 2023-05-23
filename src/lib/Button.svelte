@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
 
-  export let type: "button" | "submit" | "submit" = "button";
+  export let type: "button" | "submit" = "button";
   export let outline: boolean = false;
   export let styles: string = "";
   // export let name: string = "button";
