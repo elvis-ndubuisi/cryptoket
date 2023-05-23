@@ -65,11 +65,13 @@
       }, 600);
     } catch (error) {
       showError = true;
-      if (error?.response?.status === 401) {
+      if (error?.response?.status === 403) {
         errorData = error?.response?.data;
+        return;
       }
       if (error?.response?.status === 400 && error?.response?.data.length > 0) {
         errorData = error?.response?.data[0].message;
+        return;
       }
       errorData =
         error?.response?.data === undefined
