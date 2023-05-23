@@ -35,7 +35,11 @@
         class="h-[52px] md:h-[104px] aspect-square object-cover object-center"
       />
       <div class="flex-1 flex flex-col">
-        <p class="font-semibold text-sm capitalize">{data.name}</p>
+        <p
+          class="font-semibold text-sm capitalize line-clamp-1 break-before-page"
+        >
+          {data.name}
+        </p>
         <p class="font-regular text-sm capitalize">{data.authorName}</p>
       </div>
 

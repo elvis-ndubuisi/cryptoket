@@ -69,7 +69,7 @@
   </section>
 {:else}
   <section
-    class="max-w-5xl mx-auto min-h-[70vh] flex flex-col md:flex-row gap-5 pt-6"
+    class="overflow-x-hidden max-w-5xl mx-auto min-h-[70vh] flex flex-col md:flex-row gap-5 pt-6"
   >
     <div
       class="grid place-content-center flex-1 border-r border-cr-grey-100 dark:border-cr-black-100 p-3"
@@ -83,7 +83,7 @@
 
     <section class="flex-[0.8] flex flex-col gap-4 p-3">
       <div class="flex items-center gap-2">
-        <h2 class="font-semibold text-2xl capitalize">
+        <h2 class="font-semibold text-2xl capitalize break-words">
           {data?.name}
         </h2>
         <span
