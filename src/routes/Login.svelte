@@ -8,6 +8,12 @@
   import Button from "../lib/Button.svelte";
   import Label from "../lib/Label.svelte";
 
+  const creds = [
+    { username: "rema kuti", password: "43basement" },
+    { username: "victony nft", password: "@vickybatch" },
+    { username: "rogue man", password: "duged38#" },
+  ];
+
   let navigate = useNavigate();
   let location = useLocation();
   let controller = new AbortController();
@@ -127,68 +133,26 @@
     {/if}
 
     <footer class="bg-cr-grey-100 dark:bg-cr-black-100 p-4 rounded-lg">
-      <div>
-        <button
-          type="button"
-          class="text-center font-semibold text-lg capitalize"
-        >
-          User 1 Credentials
-          <span>icon</span>
-        </button>
+      {#each creds as cred, idx}
         <div>
-          <div class="flex items-center justify-between">
-            <p class="font-regular text-sm capitalize font-medium">username</p>
-            <p class="font-regular text-sm font-medium">victony nft</p>
-          </div>
-          <div class="flex items-center justify-between">
-            <p class="font-regular text-sm font-medium capitalize">password</p>
-            <p class="font-regular text-sm font-medium">@vickybatch</p>
-          </div>
-        </div>
-      </div>
-      <div>
-        <button
-          type="button"
-          class="text-center font-semibold text-lg capitalize mt-3"
-        >
-          User 2 Credentials
-          <span>icon</span>
-        </button>
+          <h4 class="w-full text-center uppercase">
+            User {idx + 1} Credentials
+          </h4>
 
-        <div>
-          <div class="flex items-center justify-between">
-            <p class="font-regular text-sm capitalize font-medium">username</p>
-            <p class="font-regular text-sm font-medium">rema kuti</p>
-          </div>
-          <div class="flex items-center justify-between">
-            <p class="font-regular text-sm capitalize font-medium">password</p>
-            <p class="font-regular text-sm font-medium">43basement</p>
-          </div>
-        </div>
-      </div>
-      <div>
-        <h4 class="w-full text-center uppercase">
-          User 3 Credentials
-          <span>icon</span>
-        </h4>
-
-        <div
-          class=" bg-cr-light dark:bg-cr-black-200 text-cr-grey-200 dark:text-cr-light border border-cr-grey-100 dark:border-cr-black-200 rounded w-full my-2 py-1 px-3"
-        >
-          <div class="flex items-center justify-between">
-            <p class="font-regular text-sm capitalize font-semibold">
-              username
-            </p>
-            <p class="font-regular text-sm font-medium">rema kuti</p>
-          </div>
-          <div class="flex items-center justify-between">
-            <p class="font-regular text-sm capitalize font-semibold">
-              password
-            </p>
-            <p class="font-regular text-sm font-medium">43basement</p>
+          <div
+            class=" bg-cr-light dark:bg-cr-black-200 text-cr-grey-200 dark:text-cr-light border border-cr-grey-100 dark:border-cr-black-200 rounded w-full my-2 py-1 px-3"
+          >
+            <div class="flex flex-wrap items-center justify-between">
+              <p class="font-regular capitalize font-semibold">username</p>
+              <p class="font-regular font-medium">{cred.username}</p>
+            </div>
+            <div class="flex flex-wrap items-center justify-between">
+              <p class="font-regular capitalize font-semibold">password</p>
+              <p class="font-regular font-medium">{cred.password}</p>
+            </div>
           </div>
         </div>
-      </div>
+      {/each}
     </footer>
   </form>
 </section>
