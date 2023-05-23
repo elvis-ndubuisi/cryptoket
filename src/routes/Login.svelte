@@ -65,13 +65,16 @@
       }, 600);
     } catch (error) {
       showError = true;
-      if (error.response.status === 401) {
-        errorData = error.response.data;
+      if (error?.response?.status === 401) {
+        errorData = error?.response?.data;
       }
-      if (error.response.status === 400 && error.response.data.length > 0) {
-        errorData = error.response.data[0].message;
+      if (error?.response?.status === 400 && error?.response?.data.length > 0) {
+        errorData = error?.response?.data[0].message;
       }
-      errorData = error.response.data;
+      errorData =
+        error?.response?.data === undefined
+          ? "!!! something went wrong"
+          : error?.response?.data;
     } finally {
       buttonStateText = "login";
     }
@@ -125,6 +128,12 @@
       handleClick={() => navigate("/register")}
       styles="py-3">Join CryptoKet</Button
     >
+
+    {#if buttonStateText === "validating..."}
+      <small class="text-green-500 text-sm">
+        🙏 Server may take more then expected (Free plan)
+      </small>
+    {/if}
 
     {#if showError}
       <section>

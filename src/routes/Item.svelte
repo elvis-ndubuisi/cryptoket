@@ -83,7 +83,9 @@
 
     <section class="flex-[0.8] flex flex-col gap-4 p-3">
       <div class="flex items-center gap-2">
-        <h2 class="font-semibold text-2xl capitalize break-words">
+        <h2
+          class="font-semibold text-2xl capitalize whitespace-normal break-normal"
+        >
           {data?.name}
         </h2>
         <span

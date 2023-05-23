@@ -57,13 +57,16 @@
       }, 600);
     } catch (error) {
       showError = true;
-      if (error.response.status === 409) {
-        errorData = error.response.data;
+      if (error?.response?.status === 401) {
+        errorData = error?.response?.data;
       }
-      if (error.response.status === 400 && error.response.data.length > 0) {
-        errorData = error.response.data[0].message;
+      if (error?.response?.status === 400 && error?.response?.data.length > 0) {
+        errorData = error?.response?.data[0].message;
       }
-      errorData = error.response.data;
+      errorData =
+        error?.response?.data === undefined
+          ? "!!! something went wrong"
+          : error?.response?.data;
     } finally {
       buttonStateText = "Register";
     }
