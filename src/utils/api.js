@@ -3,8 +3,8 @@ import { user } from "./store";
 
 let refToken = JSON.parse(sessionStorage.getItem("refreshToken"));
 
-const baseURL = "http://localhost:8080/cryptoket";
-// const baseURL = "https://genesis-service.onrender.com/cryptoket";
+// const baseURL = "http://localhost:8080/cryptoket";
+const baseURL = "https://genesis-service.onrender.com/cryptoket";
 
 const API = axios.create({
   baseURL: baseURL,
@@ -17,10 +17,7 @@ let shouldRefresh = false;
 API.interceptors.response.use(
   (res) => res,
   async (error) => {
-    if (
-      (error.response.status === 401) &&
-      !shouldRefresh
-    ) {
+    if (error.response.status === 401 && !shouldRefresh) {
       shouldRefresh = true; // start request;
       try {
         const refResponse = await API.post("/user/auth/refresh", {
