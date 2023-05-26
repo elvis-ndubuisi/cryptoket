@@ -6,7 +6,6 @@
   export let sellerProfile: string;
   export let sellerPrice: string;
 
-  import dummyImg from "../assets/shirt-viz-screenshot.png";
 </script>
 
 <section

@@ -11,6 +11,7 @@
 </script>
 
 <button
+  data-testid="btn"
   on:click={(e) => handleClick(e)}
   {type}
   class={`capitalize rounded-lg font-semibold text-sm py-2 w-full min-w-[100px] h-[inherit] ${
