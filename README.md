@@ -6,6 +6,14 @@
 
 This template should help get you started developing with Svelte in Vite.
 
+<div style="display: flex;align-items:center;justify-content:center;margin:auto;gap:1em;">
+
+![Twitter Follow](https://img.shields.io/twitter/follow/trickthevick?style=social)
+
+![Website](https://img.shields.io/website?down_message=inactive&up_message=active&url=https%3A%2F%2Fcryptoket-nft.vercel.app)
+
+</div>
+
 ## **🧑‍🏭 User Actions**
 
 - Login to account (authentication access)
@@ -25,6 +33,7 @@ This template should help get you started developing with Svelte in Vite.
   - TailwindCss: class-based 🎨 CSS style
   - Iconify: Icon library 👃
   - ViteJs: 🤔
+  - Vitest: Testing 🧪
 - **🍝 Backend & API 🌵**
   - MongoDB: Database 🪣
   - ExpressJs : API & routes 🔌
@@ -33,13 +42,9 @@ This template should help get you started developing with Svelte in Vite.
 
 ## Challenges & Observations
 
-- **States & the concept of `reactivity`**: something.
-
-**Stores in `SvelteJs`**: The whole concept of external stores felt different in Svelte. The first question I had was _why attach `$:` to store values and why some blog contents were omitted_.
+**Stores in `SvelteJs`**: The whole concept of external stores and states felt different at first. With expectations of using stores and states the same way I usually do in ReactJs and NextJs.
 
 - **Passing functions as props**: Passing props in svelte components is required using the `export` keyword. I always had to declare arrow functions using the `let` keyword. Although I intentionally 🧐 avoided using the `dispatch` in Svelte.
-
-- **Stores & Context in SvelteJS**: store
 
 ## **Credits 🤟**
 
@@ -47,10 +52,8 @@ The UI design figma file used for this project was created by the [designer](htt
 
 ## **Contact Me 💓**
 
-- [Send me a mail](https://mail)
+- [Visit Portfolio](https://elvis.js.cool)
 
-- [Visit Portfolio](https://)
+- [DM on Twitter](https://twitter.com/trickthevick)
 
-- [DM on Twitter](https/twitter)
-
-- [LinkedIn Profile](https/twitter)
+- [LinkedIn Profile](https://www.linkedin.com/in/elvisndubuisi/)
